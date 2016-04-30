@@ -1,5 +1,5 @@
 # Xuatz Anime List 2
-##### (rewritten in react + node.js!)
+Rewritten in react + node.js!
 
 ### How to build
 

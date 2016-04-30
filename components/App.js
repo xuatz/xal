@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import Footer from './Footer'
 import AddTodo from '../containers/AddTodo'
 import VisibleTodoList from '../containers/VisibleTodoList'
@@ -13,19 +15,16 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<AddTodo />
+				{/*<AddTodo />
 				<VisibleTodoList />
-				<Footer />
+				<Footer />*/}
 
-				<MyApplication />
 				<MyApplicationContainer />
 			</div>
 		);
 	}
 }
 
-export default App
-// export const MyQuestionContainer = connect(
-// 	mapStateToProps,
-// 	mapDispatchToProps
-// )(MyQuestion);
+
+export default App;
+//export default App = connect()(App);

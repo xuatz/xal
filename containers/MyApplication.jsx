@@ -1,11 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+
+import {AnimeContainer} from './AnimeContainer'
 
 const mapStateToProps = (state) => {
 	return {
 		//pair: state.getIn(['vote', 'pair']),
 		// hasVoted: state.get('hasVoted'),
 		// winner: state.get(['winner'])
+	};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		// onOptionClick: (index, status) => {
+		// 	if (!status) {
+		// 		dispatch(selectOption(index));
+		// 	}
+		// }
 	};
 }
 
@@ -17,8 +30,16 @@ export class MyApplication extends React.Component {
 
 	render() {
 		return (
+			<AnimeListing />
+		);
+	}
+}
+
+class AnimeListing extends React.Component {
+	render() {
+		return (
 			<div>
-				<span>huat ah</span>
+				<AnimeContainer />
 			</div>
 		);
 	}

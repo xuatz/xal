@@ -12,6 +12,7 @@
   "author": "xuatz",
   "license": "MIT",
   "dependencies": {
+    "babel-polyfill": "^6.7.4",
     "moment": "^2.13.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",

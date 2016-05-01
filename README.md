@@ -5,11 +5,10 @@ Rewritten in react + node.js!
 
 ```
 npm install
-npm start
+npm run dev
 open http://localhost:8080
 ```
 
 ### Breaking Issues
 
-1. Needs to generate index.html in dist/ (not sure how)
-2. Put [index.html](https://gist.github.com/xuatz/9a8ed2e960000761985108114657167d) in dist/
+Nothing for now!! (I hope)

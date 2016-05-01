@@ -4,6 +4,7 @@ var WebpackDevServer = require('webpack-dev-server');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	devtool: "source-map",
 	entry: [
 		'./index.js'
 	],
@@ -34,8 +35,9 @@ module.exports = {
 	module: {
 		loaders: [{
 			test: /\.jsx?$/,
-			exclude: /node_modules/,
-			loader: 'babel'
+			loader: 'babel',
+			include: __dirname,
+			exclude: /node_modules/
 		}]
 	},
 	resolve: {

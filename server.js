@@ -11,8 +11,7 @@ console.log('xz: __dirname', __dirname);
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/', function(req, res) {
-	//console.log('xz: __dirname', __dirname);
-	res.sendFile('/dist/index.html')
+	res.sendFile(__dirname + '/dist/index.html');
 });
 
 httpServer.listen(PORT, function(error) {

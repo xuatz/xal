@@ -14,32 +14,37 @@ module.exports = {
 		publicPath: '/'
 	},
 	plugins: [
+		new webpack.optimize.OccurenceOrderPlugin(),
 		new HtmlWebpackPlugin({
 			template: 'index.html', // Load a custom template 
 			inject: 'body' // Inject all scripts into the body 
 		}),
+		new webpack.DefinePlugin({
+			"process.env": {
+				"NODE_ENV": JSON.stringify("production")
+			}
+		}),
 		new webpack.optimize.UglifyJsPlugin({
-			minimize: true,
 			compress: {
 				warnings: false
 			}
 		}),
-		new webpack.DefinePlugin({
-			'process.env': {
-				'NODE_ENV': JSON.stringify('production')
-			}
-		})
+		new webpack.NoErrorsPlugin()
+
 	],
 	module: {
-		loaders: [
-			{
-				test: /\.jsx?$/,
-				loader: 'babel',
-				exclude: /node_modules/
-			}
-		]
+		loaders: [{
+			test: /\.jsx?$/,
+			loader: 'babel',
+			include: __dirname,
+			exclude: /node_modules/
+		}]
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx']
-	}
+	},
+	devServer: {
+		contentBase: './dist',
+		hot: true
+	},
 };

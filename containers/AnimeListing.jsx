@@ -41,10 +41,10 @@ const mapDispatchToProps = (dispatch) => {
 
 class AnimeListing extends React.Component {
 	componentDidMount() {
-		const update = this.props.updateCountdown();
+		this.props.updateCountdown();
         // componentDidMount is called by react when the component 
         // has been rendered on the page. We can set the interval here:
-        this.timer = setInterval(update, 60000);
+        this.timer = setInterval(this.props.updateCountdown, 60000); //60000
     }
 
     componentWillUnmount() {

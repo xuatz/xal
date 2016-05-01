@@ -25,7 +25,12 @@ let reduxState;
 function configureStore(initialState) {
 	let store = createStore(rootReducer, initialState);
 
-	process.env.NODE_ENV = process.env.NODE_ENV || 'development'; //TODO need to inject ENV variable... properly
+	console.log('process.env.NODE_ENV: ' + process.env.NODE_ENV);
+	if (process.env.NODE_ENV) {
+
+	} else {
+		process.env.NODE_ENV = 'development';//TODO need to inject ENV variable... properly
+	}
 
 	if (process.env.NODE_ENV === 'development') {
 		console.log('xz: NODE_ENV is `development`');

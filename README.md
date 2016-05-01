@@ -12,3 +12,4 @@ open http://localhost:8080
 ### Breaking Issues
 
 1. Needs to generate index.html in dist/ (not sure how)
+11. Put [index.html](https://gist.github.com/xuatz/9a8ed2e960000761985108114657167d.js) in dist/

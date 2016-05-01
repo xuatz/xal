@@ -4,40 +4,21 @@ import moment from 'moment';
 
 const mapStateToProps = (state) => {
 	return {
-		daysUntil: state.animeContainer.daysUntil,
-		hoursUntil: state.animeContainer.hoursUntil,
-		minutesUntil: state.animeContainer.minutesUntil
+		// daysUntil: state.animeListing.daysUntil,
+		// hoursUntil: state.animeContainer.hoursUntil,
+		// minutesUntil: state.animeContainer.minutesUntil
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		_updateCountdown: (airingDateTime) => {
-			dispatch(updateCountdown(moment(airingDateTime)));
-		}
+		// _updateCountdown: (airingDateTime) => {
+		// 	dispatch(updateCountdown(moment(airingDateTime)));
+		// }
 	};
 }
 
-//xz: an action creator
-function updateCountdown(airingDateTime) {
-	return {
-		type: 'UPDATE_COUNTDOWN',
-		airingDateTime: airingDateTime
-	}
-}
-
 class Anime extends React.Component {
-	componentDidMount() {
-		const update = this.props._updateCountdown(this.props.item.airingDateTime);
-        // componentDidMount is called by react when the component 
-        // has been rendered on the page. We can set the interval here:
-        this.timer = setInterval(update, 60000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timer);
-    }
-
 	render() {
 		return (
 			<div>
@@ -46,13 +27,13 @@ class Anime extends React.Component {
 				</h4>
 				<div>
 					<span style={{padding:'4px'}}>
-						{this.props.daysUntil} {(this.props.daysUntil == '1' || this.props.daysUntil == '0') ? 'day' : 'days'}
+						{this.props.item.daysUntil} {(this.props.item.daysUntil == '1' || this.props.item.daysUntil == '0') ? 'day' : 'days'}
 					</span>
 					<span style={{padding:'4px'}}>
-						{this.props.hoursUntil} {(this.props.hoursUntil == '1' || this.props.hoursUntil == '0') ? 'hr' : 'hrs'}
+						{this.props.item.hoursUntil} {(this.props.item.hoursUntil == '1' || this.props.item.hoursUntil == '0') ? 'hr' : 'hrs'}
 					</span>
 					<span style={{padding:'4px'}}>
-						{this.props.minutesUntil} {(this.props.minutesUntil == '1' || this.props.minutesUntil == '0') ? 'min' : 'mins'}
+						{this.props.item.minutesUntil} {(this.props.item.minutesUntil == '1' || this.props.item.minutesUntil == '0') ? 'min' : 'mins'}
 					</span>
 					<span style={{padding:'4px'}}>
 						until next episode!

@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import todos from './todos'
 import visibilityFilter from './visibilityFilter'
-import animeContainer from './animeContainer'
+import animeListing from './animeListing'
 
 const todoApp = combineReducers({
   todos,
   visibilityFilter,
-  animeContainer
+  animeListing
 })
 
 export default todoApp

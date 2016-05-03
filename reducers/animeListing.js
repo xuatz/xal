@@ -20,7 +20,7 @@ function fetchCurrentlyAiringSeries() {
 		},
 		{
 			title: 'Joker Game',
-			airingDateTime: '2016-04-05T11:00:00+09:00'
+			airingDateTime: '2016-04-05T23:00:00+09:00'
 		},
 		{
 			title: 'Kabaneri of the Iron Fortress',

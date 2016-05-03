@@ -1,6 +1,10 @@
 # Xuatz Anime List 2
 Rewritten in react + node.js!
 
+## Live Demo
+Check it out here!!  
+http://xuatz.github.io/
+
 ### How to build
 
 ```

@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
-class AnimeListing extends React.Component {
+class UserListing extends React.Component {
 	componentDidMount() {
 		this.props.updateCountdown();
         // componentDidMount is called by react when the component 
@@ -46,7 +46,7 @@ class AnimeListing extends React.Component {
 	}
 }
 
-export const AnimeListingContainer = connect(
+export const UserListingContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(AnimeListing);
+)(UserListing);

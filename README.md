@@ -17,6 +17,8 @@ open http://localhost:8080
 
 1. ~~Update the listing order to show last aired episodes starting from 2 days ago~~
 2. Global Anime List
+1. Personal Anime List
+  1. Recently Aired + Airing Soon sections
 3. Add to watching/drop
 4. Create account(local-storage?)
 5. Display aired episodes as childrens of the "Anime" container/component

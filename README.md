@@ -16,9 +16,9 @@ open http://localhost:8080
 ### Feature Roadmap
 
 1. ~~Update the listing order to show last aired episodes starting from 2 days ago~~
-2. Create account(local-storage?)
-3. Global Anime List
-4. Add to watching/drop
+2. Global Anime List
+3. Add to watching/drop
+4. Create account(local-storage?)
 5. Display aired episodes as childrens of the "Anime" container/component
 6. Show last 2 episodes by default?? Expand into last 10 episodes, click series into series dedicated page to review all episodes
 7. Anime series dedicated page

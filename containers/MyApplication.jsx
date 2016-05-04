@@ -21,7 +21,15 @@ const mapDispatchToProps = (dispatch) => {
 export class MyApplication extends React.Component {
 	render() {
 		return (
-			<AnimeListingContainer />
+			<div>
+				<div style={{width:'50%', float:'left'}} >
+					<AnimeListingContainer />
+				</div>
+				<div style={{width:'50%', float:'left'}} >
+					<AnimeListingContainer />
+				</div>
+			</div>
+			
 		);
 	}
 }

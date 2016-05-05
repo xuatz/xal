@@ -68,6 +68,8 @@ ReactDOM.render((
 	</Provider>
 ), document.getElementById('root'));
 
+//TODO perhaps should wrap within a "if env is dev"
+
 if (module.hot) {
 	module.hot.accept('./components/App', () => {
 		var {AppContainer} = require('react-hot-loader');

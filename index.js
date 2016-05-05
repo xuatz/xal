@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
-import { AppContainer } from 'react-hot-loader';
 
 import rootReducer from './reducers'
 import App from './components/App'
@@ -64,15 +63,14 @@ function createRoutes() {
 //currently this demo is a single page application, might wan to include routing (99% likely)
 //should replace App with routes
 ReactDOM.render((
-	<AppContainer>
-		<Provider store={store}>
-			<App />
-		</Provider>
-	</AppContainer>
+	<Provider store={store}>
+		<App />
+	</Provider>
 ), document.getElementById('root'));
 
 if (module.hot) {
 	module.hot.accept('./components/App', () => {
+		var {AppContainer} = require('react-hot-loader');
 		// If you use Webpack 2 in ES modules mode, you can
 		// use <App /> here rather than require() a <NextApp />.
 		const NextApp = require('./components/App').default;

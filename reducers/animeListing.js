@@ -41,6 +41,14 @@ function fetchCurrentlyAiringSeries() {
 		{
 			title: 'Sousei no Onmyouji',
 			airingDateTime: '2016-04-06T18:25:00+09:00'
+		},
+		{
+			title: 'JoJo no Kimyou na Bouken: Diamond wa Kudakenai',
+			airingDateTime: '2016-04-02T00:30:00+09:00'
+		},
+		{
+			title: 'Flying Witch',
+			airingDateTime: '2016-04-10T02:25:00+09:00'
 		}
 	];
 }

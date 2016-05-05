@@ -1,4 +1,8 @@
 *.swp
 node_modules
 dist
-.tmp
+.tmp
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {AnimeListingContainer} from './AnimeListing' //TODO rename to GlobalAnimeListing soon
+import {GlobalListContainer} from './GlobalList' //TODO rename to GlobalAnimeListing soon
 import {UserListingContainer} from './UserListing'
 
 const mapStateToProps = (state) => {
@@ -39,7 +39,7 @@ export class MyApplication extends React.Component {
 							Currently Airing Series
 						</h2>
 						<hr/>
-						<AnimeListingContainer />
+						<GlobalListContainer />
 					</div>
 				</div>
 			</div>

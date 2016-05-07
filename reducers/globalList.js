@@ -55,7 +55,7 @@ function fetchCurrentlyAiringSeries() {
 
 let initialState = fetchCurrentlyAiringSeries();
 
-const animeListing = (state = initialState, action) => {
+const globalList = (state = initialState, action) => {
 	switch (action.type) {
 		case 'UPDATE_COUNTDOWN':
 			return state.map(function(item){
@@ -66,4 +66,4 @@ const animeListing = (state = initialState, action) => {
 	}
 }
 
-export default animeListing
+export default globalList

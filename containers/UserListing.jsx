@@ -5,9 +5,11 @@ import {AnimeContainer} from './Anime'
 import * as MyUtil from '../lib/util.js'
 
 const mapStateToProps = (state) => {
-	let series = MyUtil.sortSeriesByAiringDateTime(state.animeListing);
+	let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(state.globalList);
+
 	return {
-		series: series
+		recentlyAired: recentlyAired,
+		upcomingSeries: upcomingSeries
 	};
 }
 
@@ -36,7 +38,12 @@ class UserListing extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.props.series.map(
+				{this.props.recentlyAired.map(
+					function(item, index) {
+						return <AnimeContainer item={item} key={index} type="RECENTLY_AIRED" />;
+					}
+				)}
+				{this.props.upcomingSeries.map(
 					function(item, index) {
 						return <AnimeContainer item={item} key={index} />;
 					}

@@ -5,9 +5,14 @@ import {AnimeContainer} from './Anime'
 import * as MyUtil from '../lib/util.js'
 
 const mapStateToProps = (state) => {
-	let series = MyUtil.xuatzSortByAiring(state.animeListing);
+	//TODO do i need to mapStateToProps? why not just state directly
+	//but considering i need to do some manipulation, is this justified?
+	//honestly tho, i can do it in the component render() function, is that better?
+	let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(state.animeListing);
+
 	return {
-		series: series
+		recentlyAired: recentlyAired,
+		upcomingSeries: upcomingSeries
 	};
 }
 
@@ -24,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
 class AnimeListing extends React.Component {
 	componentDidMount() {
 		this.props.updateCountdown();
-        // componentDidMount is called by react when the component 
+        // componentDidMount is called by react when the component
         // has been rendered on the page. We can set the interval here:
         this.timer = setInterval(this.props.updateCountdown, 60000); //60000
     }
@@ -36,11 +41,29 @@ class AnimeListing extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.props.series.map(
-					function(item, index) {
-						return <AnimeContainer item={item} key={index} />;
-					}
-				)}
+				<div style={{background:'red'}} >
+					<h3>Recently Aired</h3>
+					<div style={{display:'inline-block'}}>
+						{this.props.recentlyAired.map(
+							function(item, index) {
+								return (
+									<div style={{float:'left', width:'33%'}}>
+										<AnimeContainer item={item} key={index} />
+									</div>
+								);
+							}
+						)}
+					</div>
+				</div>
+				<hr/>
+				<div style={{background:'orange'}} >
+					<h3>Next Episode Airing Soon</h3>
+					{this.props.upcomingSeries.map(
+						function(item, index) {
+							return <AnimeContainer item={item} key={index} />;
+						}
+					)}
+				</div>
 			</div>
 		);
 	}

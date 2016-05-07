@@ -23,7 +23,7 @@ export class MyApplication extends React.Component {
 	render() {
 		return (
 			<div>
-				<div style={{width:'50%', float:'left', background:'yellow'}} >
+				<div style={{width:'35%', float:'left', background:'yellow'}} >
 					<div style={{padding:'0px 20px'}} >
 						<h2>
 							My Watching List *WIP*
@@ -33,7 +33,7 @@ export class MyApplication extends React.Component {
 						<UserListingContainer />
 					</div>
 				</div>
-				<div style={{width:'50%', float:'left', background:'teal'}} >
+				<div style={{width:'65%', float:'left', background:'teal'}} >
 					<div style={{padding:'0px 20px'}} >
 						<h2>
 							Currently Airing Series
@@ -43,7 +43,7 @@ export class MyApplication extends React.Component {
 					</div>
 				</div>
 			</div>
-			
+
 		);
 	}
 }

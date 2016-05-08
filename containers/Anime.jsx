@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
-const trendingPanelWidth = '400px';
-const trendingPanelHeight = '360px';
+const trendingPanelWidth = '350px';
+const trendingPanelHeight = '500px';
 
 class Anime extends React.Component {
 
@@ -28,7 +28,7 @@ class Anime extends React.Component {
 			//TODO rename this key??
 			case 'GLOBAL_STATS':
 				return (
-					<div style={{width: trendingPanelWidth, height: trendingPanelHeight, background:'purple'}} >
+					<div style={{background:'purple'}} >
 						<div style={{display:'inline-block', background:'lightgreen'}} >
 							<div style={{float: 'left', background:'orange', width:'50%'}}>
 								<div style={{margin:'10px'}} >
@@ -82,13 +82,13 @@ class Anime extends React.Component {
 
 	render() {
 		return (
-			<div style={{width: trendingPanelWidth, maxHeight: trendingPanelHeight}}>
+			<div style={this.props.type == 'GLOBAL_STATS' ? {maxHeight:trendingPanelHeight, maxWidth: trendingPanelWidth}
+				: {maxHeight:trendingPanelHeight}}>
 				<div>
 					<h4>{this.props.item.title}</h4>
 				</div>
-				<div>
-					{this.itemTypeRenderer(this.props.type)}
-				</div>
+
+				{this.itemTypeRenderer(this.props.type)}
 			</div>
 		);
 	}

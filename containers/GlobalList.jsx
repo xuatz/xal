@@ -43,11 +43,11 @@ class GlobalList extends React.Component {
 			<div>
 				<div style={{background:'red'}} >
 					<h3>Trending Series (past 7 days)</h3>
-					<div style={{display:'inline-block'}}>
+					<div style={{display:'inline-block', background:'pink'}}>
 						{this.props.recentlyAired.map(
 							function(item, index) {
 								return (
-									<div style={{float:'left', width:'33%'}}>
+									<div style={{float:'left', margin:'0px 20px', background:'BLUE'}} >
 										<AnimeContainer item={item} key={index} type="GLOBAL_STATS" />
 									</div>
 								);
@@ -55,7 +55,9 @@ class GlobalList extends React.Component {
 						)}
 					</div>
 				</div>
-				<hr/>
+				<div>
+					<hr/>
+				</div>
 				<div style={{background:'orange'}} >
 					<h3>Top Rated Series of the Season (reset every quarter/season)</h3>
 					{this.props.upcomingSeries.map(

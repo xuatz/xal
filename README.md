@@ -27,6 +27,7 @@ open http://localhost:8080
 8. Central remote database
 9. Sync local-storage data into remote database (or just breaking changes)
 10. Global Series ranking (inspired by rotten tomatoes system)
+11. Add a new tab, "Browse this season anime", to facilitate adding a series into watch list.
 
 ### Breaking Issues
 

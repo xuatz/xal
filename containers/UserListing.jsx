@@ -45,7 +45,7 @@ class UserListing extends React.Component {
 				)}
 				{this.props.upcomingSeries.map(
 					function(item, index) {
-						return <AnimeContainer item={item} key={index} />;
+						return <AnimeContainer item={item} key={index} type="DEFAULT" />;
 					}
 				)}
 			</div>

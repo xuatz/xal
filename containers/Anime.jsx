@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch) => {
 const trendingPanelWidth = '350px';
 const trendingPanelHeight = '500px';
 
+const upArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Up.png' width='12px' />;
+const downArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Down.png' width='12px' />
+
 class Anime extends React.Component {
 
 	itemTypeRenderer(type) {
@@ -41,8 +44,9 @@ class Anime extends React.Component {
 								</p>
 								<p>*sample*85% of the people who watched this liked the latest episode!</p>
 								<p>*sample*Watched by 23957 people!</p>
-								<p>*sample*Ranked #3</p>
-								<p>*sample*Moved up 2 places from last week (#5)</p>
+								<p>
+									*sample* Rank {upArrow}3(5)
+								</p>
 							</div>
 						</div>
 						{/*<div style={{background:'grey'}}>

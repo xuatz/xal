@@ -5,7 +5,7 @@ function fetchCurrentlyAiringSeries() {
 		{
 			title: 'Re:Zero kara Hajimeru Isekai Seikatsu',
 			airingDateTime: '2016-04-04T01:05:00+09:00',
-			thumbnail: 'http://anilist.co/img/dir/anime/reg/21450-WwdbQpTAxS4A.jpg'
+			thumbnail: 'http://cdn.myanimelist.net/images/anime/11/79410.jpg'
 		},
 		{
 			title: 'Assassination Classroom S2',

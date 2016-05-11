@@ -16,7 +16,7 @@ open http://localhost:8080
 ### Feature Roadmap
 
 1. ~~Update the listing order to show last aired episodes starting from 2 days ago~~
-2. Stats Panel~~Global Anime List~~
+2. Stats Panel
   1. Trending Series (past 7 days)
   1. Seasonal Performers (past 3 months?)
 1. List Panel

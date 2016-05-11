@@ -30,7 +30,7 @@ class Anime extends React.Component {
 			//TODO rename this key??
 			case 'GLOBAL_STATS':
 				return (
-					<div>
+					<div style={{background:'orange'}} >
 						<div style={{display:'inline-block'}} >
 							<div style={{float: 'left', width:'50%'}}>
 								<div style={{margin:'10px'}} >
@@ -86,7 +86,7 @@ class Anime extends React.Component {
 	render() {
 		return (
 			<div style={this.props.type == 'GLOBAL_STATS' ? style.globalStats : style.default}>
-				<div style={{background:'red'}} >
+				<div>
 					<AnimeTitle title={this.props.item.title} id={this.props.type + '-' + count++} />
 				</div>
 
@@ -114,28 +114,46 @@ class AnimeTitle extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			isTooltipActive: false
+			isTooltipActive: false,
+			isWatching: false //this value should be, higher up, not stored at such low level
 		}
 	}
-    showTooltip() {
-        this.setState({isTooltipActive: true})
-    }
-    hideTooltip() {
-        this.setState({isTooltipActive: false})
-    }
+
+	toggleTooltip() {
+		this.setState({isTooltipActive: !this.state.isTooltipActive})
+	}
+	hideTooltip() {
+		this.setState({isTooltipActive: false})
+	}
+
+	toggleIsWatching() {
+		this.setState({isWatching: !this.state.isWatching})
+	}
+	addToWatching() {
+		this.setState({isWatching: true})	
+	}
+	removeFromWatching() {
+		this.setState({isWatching: false})
+	}
+	
 	render() {
-		let isWatching = false;
 		return (
 			<div>
                 <h4>
-                	<span id={this.props.id} onMouseEnter={this.showTooltip.bind(this)} onMouseLeave={this.hideTooltip.bind(this)} >
+                	<span id={this.props.id} onClick={this.toggleTooltip.bind(this)}>
                 		{this.props.title}
                 	</span>
                 </h4>
-                <ToolTip active={this.state.isTooltipActive} position="top" arrow="left" parent={"#" + this.props.id}>
+                <ToolTip active={this.state.isTooltipActive} position="top" arrow="left" 
+                	parent={"#" + this.props.id}
+                	tooltipTimeout={150} >
                     <div>
-	                    {isWatching ? <button>Add to watch list</button> 
-	                    	: <button>Remove from watch list</button>}
+                    	<div style={{margin:'0px 5px', float:'left'}}>
+                    		<button onClick={this.addToWatching.bind(this)}>Add to watch list</button>
+                    	</div>
+                    	<div style={{margin:'0px 5px', float:'left'}}>
+                    		<button onClick={this.removeFromWatching.bind(this)}>Remove from watch list</button>
+                    	</div>
                     </div>
                 </ToolTip>
             </div>

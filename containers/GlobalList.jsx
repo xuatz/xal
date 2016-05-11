@@ -47,7 +47,7 @@ class GlobalList extends React.Component {
 						{this.props.recentlyAired.map(
 							function(item, index) {
 								return (
-									<div key={index} style={{float:'left', margin:'0px 20px'}} >
+									<div key={index} style={{float:'left', margin:'0px 20px', background:'blue'}} >
 										<AnimeContainer item={item} key={index} type="GLOBAL_STATS" />
 									</div>
 								);

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import {GlobalListContainer} from './GlobalList' //TODO rename to GlobalAnimeListing soon
 import {UserListingContainer} from './UserListing'
+import {ListsPanelContainer} from './ListsPanel'
 
 const mapStateToProps = (state) => {
 	return {
@@ -18,6 +19,14 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
+const getUserWatchList = () => {
+	console.log('huat ah');
+
+	return [101, 102];
+}
+
+
+
 //dumb / pure component
 export class MyApplication extends React.Component {
 	render() {
@@ -25,11 +34,7 @@ export class MyApplication extends React.Component {
 			<div>
 				<div style={{width:'35%', float:'left', background:'yellow'}} >
 					<div style={{padding:'0px 20px'}} >
-						<h2>
-							My Watching List *WIP*
-						</h2>
-						<hr/>
-
+						<ListsPanelContainer watchList={getUserWatchList()} />
 						<UserListingContainer />
 					</div>
 				</div>
@@ -43,7 +48,6 @@ export class MyApplication extends React.Component {
 					</div>
 				</div>
 			</div>
-
 		);
 	}
 }

@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
-import visibilityFilter from './visibilityFilter'
 import globalList from './globalList'
+import myApplication from './myApplication'
 
-const todoApp = combineReducers({
-  todos,
-  visibilityFilter,
-  globalList
+const xal = combineReducers({
+	myApplication,
+	globalList
 })
 
-export default todoApp
+export default xal

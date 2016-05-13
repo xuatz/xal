@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
-class UserListing extends React.Component {
+class ListsPanel extends React.Component {
 	componentDidMount() {
 		this.props.updateCountdown();
         // componentDidMount is called by react when the component
@@ -38,24 +38,50 @@ class UserListing extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2>My Watching List *WIP*</h2>
-				<hr/>
-				{this.props.recentlyAired.map(
-					function(item, index) {
-						return <AnimeContainer item={item} key={index} type="RECENTLY_AIRED" />;
-					}
-				)}
-				{this.props.upcomingSeries.map(
-					function(item, index) {
-						return <AnimeContainer item={item} key={index} type="DEFAULT" />;
-					}
-				)}
+				<UserWatchList />
+				<RemainingList />
 			</div>
 		);
 	}
 }
 
-export const UserListingContainer = connect(
+class UserWatchList extends React.Component {
+	render() {
+		return (
+			<div>
+			</div>
+		)
+	}
+}
+
+
+/*
+
+{this.props.recentlyAired.map(
+	function(item, index) {
+		return <AnimeContainer item={item} key={index} type="RECENTLY_AIRED" />;
+	}
+)}
+{this.props.upcomingSeries.map(
+	function(item, index) {
+		return <AnimeContainer item={item} key={index} type="DEFAULT" />;
+	}
+)}
+
+*/
+
+class RemainingList extends React.Component {
+	render() {
+		return (
+			<div>
+
+
+			</div>
+		)
+	}
+}
+
+export const ListsPanelContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(UserListing);
+)(ListsPanel);

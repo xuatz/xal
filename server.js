@@ -6,8 +6,6 @@ var PORT = process.env.PORT || 8080
 var app = express();
 var httpServer = http.createServer(app);
 
-console.log('xz: __dirname', __dirname);
-
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/', function(req, res) {

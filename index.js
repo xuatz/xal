@@ -10,16 +10,6 @@ import promise from 'redux-promise';
 import rootReducer from './reducers'
 import App from './components/App'
 
-//xz: for server-side processing, getting the redux store state/value
-let reduxState;
-// if (window.__REDUX_STATE__) {
-// 	try {
-// 		reduxState = JSON.parse(unescape(__REDUX_STATE__));
-// 	} catch (e) {
-
-// 	}
-// }
-
 //TODO xz: should relocate this somewhere like /store/configureStore.js next time
 function configureStore(initialState) {
 	let store = createStore(rootReducer, initialState);
@@ -52,13 +42,9 @@ function configureStore(initialState) {
 	return store;
 }
 
+//xz: for server-side processing, getting the redux store state/value
+let reduxState;
 const store = configureStore(reduxState);
-
-//TODO STUB
-function createRoutes() {
-	//TODO routes stuff; check out react-router
-	// den after that check out react-redux-router (if wrong rearrange the name)
-}
 
 //currently this demo is a single page application, might wan to include routing (99% likely)
 //should replace App with routes

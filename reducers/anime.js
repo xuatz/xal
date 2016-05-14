@@ -1,7 +1,6 @@
 import moment from 'moment';
 
 //xz: this is very bad, because this reducer is not pure
-
 //TODO need to change the code to make the reducer pure
 function getCountdownFields(airingDateTime, log) {
 	const now = moment();
@@ -12,11 +11,6 @@ function getCountdownFields(airingDateTime, log) {
 	while(dayDiff < 0) {
 		airingDateTimeMoment.add(7, 'days');
 		dayDiff = airingDateTimeMoment.diff(now, 'days');
-
-		// if (dayDiff == -0) {
-		// 	airingDateTimeMoment.add(7, 'days');
-		// 	dayDiff = airingDateTimeMoment.diff(now, 'days');			
-		// }
 
 		if (log) {
 			console.log('huat ah');
@@ -44,16 +38,16 @@ function getCountdownFields(airingDateTime, log) {
 	let res = {
 		daysUntil: Math.floor(duration.asDays()),
 		hoursUntil: Math.floor(duration.hours()),
-		minutesUntil: Math.floor(duration.minutes())
+		minutesUntil: Math.floor(duration.minutes()),
+		secsUntil: Math.floor(duration.seconds())
 	};
+
+	// if (Math.random() > 0.5) {
+	// 	res.daysUntil = 6;
+	// }
 
 	if (log) {
 		console.log('xz: duration', duration);
-		console.log(res);
-	}
-
-	if (Math.random() > 0.5) {
-		res.daysUntil = 6;
 		console.log(res);
 	}
 

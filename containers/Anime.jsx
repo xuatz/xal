@@ -72,6 +72,9 @@ class Anime extends React.Component {
 							{this.props.item.minutesUntil} {(this.props.item.minutesUntil == '1' || this.props.item.minutesUntil == '0') ? 'min' : 'mins'}
 						</span>
 						<span style={{padding:'4px'}}>
+							{this.props.item.secsUntil} {(this.props.item.secsUntil == '1' || this.props.item.secsUntil == '0') ? 'sec' : 'secs'}
+						</span>
+						<span style={{padding:'4px'}}>
 							until episode 5!
 						</span>
 					</div>

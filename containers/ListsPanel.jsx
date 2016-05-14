@@ -5,41 +5,36 @@ import {AnimeContainer} from './Anime'
 import * as MyUtil from '../lib/util.js'
 
 const mapStateToProps = (state) => {
-	let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(state.globalList);
-
 	return {
-		recentlyAired: recentlyAired,
-		upcomingSeries: upcomingSeries
+		currentSeasonSeries: state.myApplication.currentSeasonSeries,
+		watchList: state.myApplication.watchList
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateCountdown: () => {
+		getRemainingSeries: (watchList) => {
 			dispatch(
-				{ type: 'UPDATE_COUNTDOWN' }
+				{ type: 'GET_REMAINING_SERIES' }
 			);
 		}
 	};
 }
 
 class ListsPanel extends React.Component {
-	componentDidMount() {
-		this.props.updateCountdown();
-        // componentDidMount is called by react when the component
-        // has been rendered on the page. We can set the interval here:
-        this.timer = setInterval(this.props.updateCountdown, 60000); //60000
+    getRemainingSeries(watchList) {
+    	//TODO STUB
     }
 
-    componentWillUnmount() {
-        clearInterval(this.timer);
+    getWatchList(watchList, currentSeasonSeries) {
+    	return MyUtil.getSeriesByIds(watchList, currentSeasonSeries) || [];
     }
 
 	render() {
 		return (
 			<div>
-				<UserWatchList />
-				<RemainingList />
+				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} />
+				<RemainingList list={this.getRemainingSeries(this.props.watchList)} />
 			</div>
 		);
 	}
@@ -49,6 +44,16 @@ class UserWatchList extends React.Component {
 	render() {
 		return (
 			<div>
+				<h2>My Watching List *WIP*</h2>
+				<hr/>
+
+				{this.props.list.map(
+					function(item, index) {
+						return <AnimeContainer item={item} key={index} type="NORMAL" />; //RECENTLY_AIRED
+					}
+				)}
+
+
 			</div>
 		)
 	}
@@ -57,11 +62,7 @@ class UserWatchList extends React.Component {
 
 /*
 
-{this.props.recentlyAired.map(
-	function(item, index) {
-		return <AnimeContainer item={item} key={index} type="RECENTLY_AIRED" />;
-	}
-)}
+
 {this.props.upcomingSeries.map(
 	function(item, index) {
 		return <AnimeContainer item={item} key={index} type="DEFAULT" />;

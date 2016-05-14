@@ -15,20 +15,20 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		updateCountdown: () => {
+			dispatch(
+				{ type: 'UPDATE_COUNTDOWN' }
+			);
+		},
 		fetchCurrentSeasonAnime: () => {
 			dispatch(actions.fetchCurrentSeasonAnime());
+		},
+		getUserWatchList: () => {
+			dispatch({
+				type: 'GET_USER_WATCH_LIST'
+			});
 		}
-
-		// _updateCountdown: (airingDateTime) => {
-		// 	dispatch(updateCountdown(moment(airingDateTime)));
-		// }
 	};
-}
-
-const getUserWatchList = () => {
-	console.log('huat ah');
-
-	return [101, 102];
 }
 
 let count = 0;
@@ -37,10 +37,13 @@ export class MyApplication extends React.Component {
 	componentDidMount() {
 		console.log('keeping track of this! Should only run once.', count++);
 		this.props.fetchCurrentSeasonAnime();
+		this.props.getUserWatchList();
+		this.props.updateCountdown();
+        this.timer = setInterval(this.props.updateCountdown, 1000); //60000 1min
     }
 
     componentWillUnmount() {
-        //clearInterval(this.timer);
+        clearInterval(this.timer);
     }
 
 	render() {
@@ -48,8 +51,7 @@ export class MyApplication extends React.Component {
 			<div>
 				<div style={{width:'35%', float:'left', background:'yellow'}} >
 					<div style={{padding:'0px 20px'}} >
-						<ListsPanelContainer watchList={getUserWatchList()} />
-						<UserListingContainer />
+						<ListsPanelContainer />
 					</div>
 				</div>
 				<div style={{width:'65%', float:'left', background:'teal'}} >

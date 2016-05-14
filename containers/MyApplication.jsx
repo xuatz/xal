@@ -5,6 +5,8 @@ import {GlobalListContainer} from './GlobalList' //TODO rename to GlobalAnimeLis
 import {UserListingContainer} from './UserListing'
 import {ListsPanelContainer} from './ListsPanel'
 
+import * as actions from '../actions'
+
 const mapStateToProps = (state) => {
 	return {
 		// currentlyAiringSeries: state.myApplication.currentlyAiringSeries
@@ -13,6 +15,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		fetchCurrentSeasonAnime: () => {
+			dispatch(actions.fetchCurrentSeasonAnime());
+		}
+
 		// _updateCountdown: (airingDateTime) => {
 		// 	dispatch(updateCountdown(moment(airingDateTime)));
 		// }
@@ -25,10 +31,18 @@ const getUserWatchList = () => {
 	return [101, 102];
 }
 
-
-
+let count = 0;
 //dumb / pure component
 export class MyApplication extends React.Component {
+	componentDidMount() {
+		console.log('keeping track of this! Should only run once.', count++);
+		this.props.fetchCurrentSeasonAnime();
+    }
+
+    componentWillUnmount() {
+        //clearInterval(this.timer);
+    }
+
 	render() {
 		return (
 			<div>
@@ -54,5 +68,6 @@ export class MyApplication extends React.Component {
 
 //smart / connected component
 export const MyApplicationContainer = connect(
-	mapStateToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(MyApplication);

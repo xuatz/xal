@@ -40,8 +40,6 @@ function getCountdownFields(airingDateTime, log) {
 	}	
 
 	const duration = moment.duration(airingDateTimeMoment.diff(now));
-	
-
 
 	let res = {
 		daysUntil: Math.floor(duration.asDays()),
@@ -53,7 +51,11 @@ function getCountdownFields(airingDateTime, log) {
 		console.log('xz: duration', duration);
 		console.log(res);
 	}
-	
+
+	if (Math.random() > 0.5) {
+		res.daysUntil = 6;
+		console.log(res);
+	}
 
 	return res;
 }

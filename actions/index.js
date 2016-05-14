@@ -1,22 +1,19 @@
-let nextTodoId = 0
-export const addTodo = (text) => {
-  return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
-  }
+export const FETCH_CURRENT_SEASON_SERIES = 'FETCH_CURRENT_SEASON_SERIES';
+
+export const fetchCurrentSeasonAnime = () => {
+	return {type: 'FETCH_CURRENT_SEASON_SERIES'}
 }
 
-export const setVisibilityFilter = (filter) => {
-  return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
-  }
-}
+//sample code
+// export function addTodo(text) {
+//   // This form is allowed by Redux Thunk middleware
+//   // described below in “Async Action Creators” section.
+//   return function (dispatch, getState) {
+//     if (getState().todos.length === 3) {
+//       // Exit early
+//       return
+//     }
 
-export const toggleTodo = (id) => {
-  return {
-    type: 'TOGGLE_TODO',
-    id
-  }
-}
+//     dispatch(addTodoWithoutCheck(text))
+//   }
+// }

@@ -31,7 +31,7 @@ class GlobalList extends React.Component {
 		this.props.updateCountdown();
         // componentDidMount is called by react when the component
         // has been rendered on the page. We can set the interval here:
-        this.timer = setInterval(this.props.updateCountdown, 60000); //60000
+        this.timer = setInterval(this.props.updateCountdown, 10000); //60000
     }
 
     componentWillUnmount() {

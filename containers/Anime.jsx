@@ -10,17 +10,13 @@ const downArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/
 
 const mapStateToProps = (state) => {
 	return {
-		// daysUntil: state.animeListing.daysUntil,
-		// hoursUntil: state.animeContainer.hoursUntil,
-		// minutesUntil: state.animeContainer.minutesUntil
+		
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		// _updateCountdown: (airingDateTime) => {
-		// 	dispatch(updateCountdown(moment(airingDateTime)));
-		// }
+
 	};
 }
 

@@ -18,26 +18,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateCountdown: () => {
-			dispatch(
-				{ type: 'UPDATE_COUNTDOWN' }
-			);
-		}
+		
 	};
 }
 
 class GlobalList extends React.Component {
-	componentDidMount() {
-		this.props.updateCountdown();
-        // componentDidMount is called by react when the component
-        // has been rendered on the page. We can set the interval here:
-        this.timer = setInterval(this.props.updateCountdown, 10000); //60000
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timer);
-    }
-
 	render() {
 		return (
 			<div>

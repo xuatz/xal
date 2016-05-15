@@ -13,7 +13,7 @@ npm run dev
 open http://localhost:8080
 ```
 
-### Feature Roadmap
+# Feature Roadmap
 
 ## Phase 1 - Basic Website
 1. ~~Show all the animes that are airing this season in chronological order of time until airing~~ (done)

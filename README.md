@@ -15,21 +15,27 @@ open http://localhost:8080
 
 ### Feature Roadmap
 
-1. ~~Update the listing order to show last aired episodes starting from 2 days ago~~
-2. Stats Panel
-  1. Trending Series (past 7 days)
-  1. Seasonal Performers (past 3 months?)
-1. List Panel
-  1. User's watching list
-    1. Shows last 4 aired anime + upcoming 4 anime
-  1. Rest of the season anime list
-    1. Shows all the other animes that is not in the user's watching list, order in airing timing
-3. Add to watching/drop
-  1. ~~Added onClick panel~~
-  1. ~~Added buttons~~
-  1. Need actual logic to add series to user's list
-4. Design user's list backend logic and implementation
-4. Create account(local-storage?)
+## Phase 1 - Basic Website
+1. ~~Show all the animes that are airing this season in chronological order of time until airing~~ (done)
+  1. Currently using dummy data for current season animes; need to fetch from db (phase 2)
+1. ~~Allow user to add/remove anime from watchlist~~ (done)
+  1. Only persist within session; pending data storage with backend. (phase 2)
+  1. Also will involve hydrating redux store somewhere (phase 2)
+1. Dummy Stats Panel
+  1. Trending (7 days period)
+  1. Seasonal (3 months period)
+
+## Phase 2 - Setup Parse Server + User Accounts
+1. Deploy ParseServer on heroku.
+1. Implement React-Router into project
+  1. create login/register module screens
+1. Implement user accounts system with Parse sdk
+1. Allow users to remain logged in between different sessions (not sure if auto provided by parse sdk)
+
+## Phase 3 - Sync user data to database + display global stats
+1. TODO STUB
+
+## Uncategoried Future Features
 5. Display aired episodes as childrens of the "Anime" container/component
 6. Show last 2 episodes by default?? Expand into last 10 episodes, click series into series dedicated page to review all episodes
 7. Anime series dedicated page
@@ -40,4 +46,4 @@ open http://localhost:8080
 
 ### Breaking Issues
 
-Nothing for now!! (I hope)
+Nothing for now!! (I think)

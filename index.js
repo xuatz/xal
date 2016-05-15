@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
+var Parse = require('parse');
 
 import rootReducer from './reducers'
 import App from './components/App'
@@ -71,3 +72,6 @@ if (module.hot) {
 		), document.getElementById('root'));
 	});
 }
+
+Parse.initialize("xuatzanimelist");
+Parse.serverURL = 'https://xuatz-dev-parse-server.herokuapp.com/parse';

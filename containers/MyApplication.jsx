@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+var Parse = require('parse');
 
 import {GlobalListContainer} from './GlobalList' //TODO rename to GlobalAnimeListing soon
 import {UserListingContainer} from './UserListing'
@@ -40,6 +41,12 @@ export class MyApplication extends React.Component {
 		this.props.getUserWatchList();
 		this.props.updateCountdown();
 		this.timer = setInterval(this.props.updateCountdown, 60000); //60000 1min
+
+		// var TestObject = Parse.Object.extend("TestObject");
+		// var testObject = new TestObject();
+		// testObject.save({foo: "bar"}).then(function(object) {
+		// 	alert("yay! it worked");
+		// });
 	}
 
 	componentWillUnmount() {

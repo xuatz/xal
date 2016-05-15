@@ -23,7 +23,8 @@ const mapDispatchToProps = (dispatch) => {
 
 class ListsPanel extends React.Component {
     getRemainingSeries(watchList, currentSeasonSeries) {
-    	return MyUtil.getRemainingSeries(watchList, currentSeasonSeries) || [];
+    	let res = MyUtil.getRemainingSeries(watchList, currentSeasonSeries);
+    	return res || [];
     }
 
     getWatchList(watchList, currentSeasonSeries) {

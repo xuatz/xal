@@ -39,7 +39,7 @@ export class MyApplication extends React.Component {
 		this.props.fetchCurrentSeasonAnime();
 		this.props.getUserWatchList();
 		this.props.updateCountdown();
-        this.timer = setInterval(this.props.updateCountdown, 1000); //60000 1min
+        this.timer = setInterval(this.props.updateCountdown, 60000); //60000 1min
     }
 
     componentWillUnmount() {

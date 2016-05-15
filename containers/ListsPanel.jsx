@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class ListsPanel extends React.Component {
-    getRemainingSeries(watchList) {
-    	//TODO STUB
+    getRemainingSeries(watchList, currentSeasonSeries) {
+    	return MyUtil.getRemainingSeries(watchList, currentSeasonSeries) || [];
     }
 
     getWatchList(watchList, currentSeasonSeries) {
@@ -34,7 +34,7 @@ class ListsPanel extends React.Component {
 		return (
 			<div>
 				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} />
-				<RemainingList list={this.getRemainingSeries(this.props.watchList)} />
+				<RemainingList list={this.getRemainingSeries(this.props.watchList, this.props.currentSeasonSeries)} />
 			</div>
 		);
 	}
@@ -52,8 +52,6 @@ class UserWatchList extends React.Component {
 						return <AnimeContainer item={item} key={index} type="NORMAL" />; //RECENTLY_AIRED
 					}
 				)}
-
-
 			</div>
 		)
 	}
@@ -75,6 +73,14 @@ class RemainingList extends React.Component {
 	render() {
 		return (
 			<div>
+				<h2>Remaining Series of this season</h2>
+				<hr/>
+
+				{this.props.list.map(
+					function(item, index) {
+						return <AnimeContainer item={item} key={index} type="NORMAL" />; //RECENTLY_AIRED
+					}
+				)}
 
 
 			</div>

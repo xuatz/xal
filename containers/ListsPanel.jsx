@@ -43,12 +43,20 @@ class ListsPanel extends React.Component {
 
 class UserWatchList extends React.Component {
 	render() {
+		let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(this.props.list);
+
 		return (
 			<div>
 				<h2>My Watching List *WIP*</h2>
 				<hr/>
 
-				{this.props.list.map(
+				{recentlyAired.map(
+					function(item, index) {
+						return <AnimeContainer item={item} key={index} type="RECENTLY_AIRED" />; //RECENTLY_AIRED
+					}
+				)}
+
+				{upcomingSeries.map(
 					function(item, index) {
 						return <AnimeContainer item={item} key={index} type="NORMAL" />; //RECENTLY_AIRED
 					}
@@ -72,12 +80,14 @@ class UserWatchList extends React.Component {
 
 class RemainingList extends React.Component {
 	render() {
+		let remaining = MyUtil.sortSeriesByAiringDateTime(this.props.list);
+
 		return (
 			<div>
 				<h2>Remaining Series of this season</h2>
 				<hr/>
 
-				{this.props.list.map(
+				{remaining.map(
 					function(item, index) {
 						return <AnimeContainer item={item} key={index} type="NORMAL" />; //RECENTLY_AIRED
 					}

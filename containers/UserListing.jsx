@@ -15,18 +15,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		
+
 	};
 }
 
 class UserListing extends React.Component {
 	componentDidMount() {
-		
-    }
 
-    componentWillUnmount() {
+	}
 
-    }
+	componentWillUnmount() {
+
+	}
 
 	render() {
 		return (

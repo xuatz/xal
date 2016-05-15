@@ -10,20 +10,32 @@ const downArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/
 
 const mapStateToProps = (state) => {
 	return {
-		
+
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-
+		addToWatchList: (id) => {
+			console.log('dispatch addToWatchList');
+			console.log('id', id);
+			dispatch(
+				{ type: 'WATCH_LIST_ADD_ITEM', id: id }
+			);
+		},
+		removeFromWatchList: (id) => {
+			console.log('dispatch removeFromWatchList');
+			console.log('id', id);
+			dispatch(
+				{ type: 'WATCH_LIST_REMOVE_ITEM', id: id }
+			);
+		}
 	};
 }
 
 class Anime extends React.Component {
 	itemTypeRenderer(type) {
 		switch(this.props.type) {
-			//TODO rename this key??
 			case 'GLOBAL_STATS':
 				return (
 					<div style={{background:'orange'}} >
@@ -71,9 +83,9 @@ class Anime extends React.Component {
 						<span style={{padding:'4px'}}>
 							{this.props.item.minutesUntil} {(this.props.item.minutesUntil == '1' || this.props.item.minutesUntil == '0') ? 'min' : 'mins'}
 						</span>
-						<span style={{padding:'4px'}}>
+						{/*<span style={{padding:'4px'}}>
 							{this.props.item.secsUntil} {(this.props.item.secsUntil == '1' || this.props.item.secsUntil == '0') ? 'sec' : 'secs'}
-						</span>
+						</span>*/}
 						<span style={{padding:'4px'}}>
 							until episode 5!
 						</span>
@@ -86,7 +98,12 @@ class Anime extends React.Component {
 		return (
 			<div style={this.props.type == 'GLOBAL_STATS' ? style.globalStats : style.default}>
 				<div>
-					<AnimeTitle title={this.props.item.title} id={this.props.type + '-' + count++} />
+					<AnimeTitle
+						id={this.props.item.id}
+						title={this.props.item.title}
+						type={this.props.type}
+						addToWatchList={this.props.addToWatchList}
+						removeFromWatchList={this.props.removeFromWatchList} />
 				</div>
 
 				{this.itemTypeRenderer(this.props.type)}
@@ -128,35 +145,39 @@ class AnimeTitle extends React.Component {
 	toggleIsWatching() {
 		this.setState({isWatching: !this.state.isWatching})
 	}
-	addToWatching() {
-		this.setState({isWatching: true})	
+	addToWatching(addId) {
+		//TODO consider to relocate logic to check if item already in watch list here?
+		this.props.addToWatchList(addId);
+		this.setState({isTooltipActive: false})
 	}
-	removeFromWatching() {
-		this.setState({isWatching: false})
+	removeFromWatching(removeId) {
+		//TODO consider to relocate logic to check if item dun exist in watch list here?
+		this.props.removeFromWatchList(removeId);
+		this.setState({isTooltipActive: false})
 	}
-	
+
 	render() {
+		let self = this;
 		return (
 			<div>
-                <h4>
-                	<span id={this.props.id} onClick={this.toggleTooltip.bind(this)}>
-                		{this.props.title}
-                	</span>
-                </h4>
-                <ToolTip active={this.state.isTooltipActive} position="top" arrow="left" 
-                	parent={"#" + this.props.id}
-                	tooltipTimeout={150} >
-                    <div>
-                    	<div style={{margin:'0px 5px', float:'left'}}>
-                    		<button onClick={this.addToWatching.bind(this)}>Add to watch list</button>
-                    	</div>
-                    	<div style={{margin:'0px 5px', float:'left'}}>
-                    		<button onClick={this.removeFromWatching.bind(this)}>Remove from watch list</button>
-                    	</div>
-                    </div>
-                </ToolTip>
-            </div>
-		); 
+				<h4>
+	          	<span id={this.props.type + '-' + this.props.id} onClick={this.toggleTooltip.bind(this)}>
+	          		{this.props.title}
+	          	</span>
+				</h4>
+				<ToolTip active={this.state.isTooltipActive} position="top" arrow="left"
+					parent={"#" + this.props.type + '-' + this.props.id} tooltipTimeout={150} >
+					<div>
+						<div style={{margin:'0px 5px', float:'left'}}>
+							<button onClick={this.addToWatching.bind(this, this.props.id)}>Add to watch list</button>
+						</div>
+						<div style={{margin:'0px 5px', float:'left'}}>
+							<button onClick={this.removeFromWatching.bind(this, this.props.id)}>Remove from watch list</button>
+						</div>
+					</div>
+				</ToolTip>
+			</div>
+		);
 	}
 }
 

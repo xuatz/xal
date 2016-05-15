@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		
+
 	};
 }
 
@@ -27,7 +27,9 @@ class GlobalList extends React.Component {
 		return (
 			<div>
 				<div style={{background: 'pink'}}>
-					<h3>Trending Series (past 7 days)</h3>
+					<h3>
+						Trending Series (past 7 days) - (Outdated Implementation, pending update)
+					</h3>
 					<div style={{display:'inline-block'}}>
 						{this.props.recentlyAired.map(
 							function(item, index) {

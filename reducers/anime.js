@@ -18,20 +18,20 @@ function getCountdownFields(airingDateTime, log) {
 			console.log(dayDiff);
 
 			console.log('xz: good value:', airingDateTimeMoment.diff(now, 'minutes'));
-			
+
 		}
 
 
 
 		while (airingDateTimeMoment.diff(now, 'minutes') < 0) {
 			airingDateTimeMoment.add(7, 'days');
-			dayDiff = airingDateTimeMoment.diff(now, 'days');			
+			dayDiff = airingDateTimeMoment.diff(now, 'days');
 		}
 	}
 	if (log) {
 		console.log('xz: dayDiff.format()', dayDiff);
-		console.log('xz: airingDateTimeMoment.format()', airingDateTimeMoment.format());	
-	}	
+		console.log('xz: airingDateTimeMoment.format()', airingDateTimeMoment.format());
+	}
 
 	const duration = moment.duration(airingDateTimeMoment.diff(now));
 
@@ -75,4 +75,3 @@ const anime = (state = initialState, action) => {
 }
 
 export default anime
-		

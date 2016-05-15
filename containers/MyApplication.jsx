@@ -39,12 +39,12 @@ export class MyApplication extends React.Component {
 		this.props.fetchCurrentSeasonAnime();
 		this.props.getUserWatchList();
 		this.props.updateCountdown();
-        this.timer = setInterval(this.props.updateCountdown, 60000); //60000 1min
-    }
+		this.timer = setInterval(this.props.updateCountdown, 60000); //60000 1min
+	}
 
-    componentWillUnmount() {
-        clearInterval(this.timer);
-    }
+	componentWillUnmount() {
+		clearInterval(this.timer);
+	}
 
 	render() {
 		return (
@@ -57,7 +57,10 @@ export class MyApplication extends React.Component {
 				<div style={{width:'65%', float:'left', background:'teal'}} >
 					<div style={{padding:'0px 20px'}} >
 						<h2>
-							Currently Airing Series
+							<strike>
+								Currently Airing Series
+							</strike>
+							(Deprecated)
 						</h2>
 						<hr/>
 						<GlobalListContainer />

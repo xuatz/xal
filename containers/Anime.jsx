@@ -124,26 +124,22 @@ const style = {
 	}
 }
 
-let count = 0;
-
+let activeId;
 class AnimeTitle extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			isTooltipActive: false,
-			isWatching: false //this value should be, higher up, not stored at such low level
+			isTooltipActive: false
 		}
 	}
-
-	toggleTooltip() {
-		this.setState({isTooltipActive: !this.state.isTooltipActive})
-	}
-	hideTooltip() {
-		this.setState({isTooltipActive: false})
-	}
-
-	toggleIsWatching() {
-		this.setState({isWatching: !this.state.isWatching})
+	toggleTooltip(tooltipId) {
+		if (tooltipId == activeId) {
+			this.setState({isTooltipActive: !this.state.isTooltipActive});
+		} else {
+			this.setState({isTooltipActive: false});
+			this.setState({isTooltipActive: true});
+		}
+		activeId = tooltipId;
 	}
 	addToWatching(addId) {
 		//TODO consider to relocate logic to check if item already in watch list here?
@@ -155,16 +151,13 @@ class AnimeTitle extends React.Component {
 		this.props.removeFromWatchList(removeId);
 		this.setState({isTooltipActive: false})
 	}
-
 	render() {
-		let self = this;
+		let tooltipId = this.props.type + '-' + this.props.id;
 		return (
 			<div>
-				<h4>
-	          	<span id={this.props.type + '-' + this.props.id} onClick={this.toggleTooltip.bind(this)}>
-	          		{this.props.title}
-	          	</span>
-				</h4>
+				<h4><span id={tooltipId} onClick={this.toggleTooltip.bind(this, tooltipId)}>
+					{this.props.title}
+				</span></h4>
 				<ToolTip active={this.state.isTooltipActive} position="top" arrow="left"
 					parent={"#" + this.props.type + '-' + this.props.id} tooltipTimeout={150} >
 					<div>

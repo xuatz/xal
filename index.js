@@ -2,11 +2,13 @@ require('babel-core/register');
 
 import React from 'react'
 import ReactDOM from 'react-dom';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
-var Parse = require('parse');
+import { Router, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import Parse from 'parse';
 
 import rootReducer from './reducers'
 import App from './components/App'

@@ -33,8 +33,8 @@ class TrendingSeries extends React.Component {
 				{this.props.list.map(
 					function(item, index) {
 						return (
-							<div style={{display:'inline-block', margin:'0px 10px 10px 0px'}}>
-								<div key={index} style={{float:'left', background:'blue'}} >
+							<div key={index}  style={{display:'inline-block', margin:'0px 10px 10px 0px'}}>
+								<div style={{float:'left', background:'blue'}} >
 									<AnimeContainer item={item} key={index} type="GLOBAL_STATS" />
 								</div>
 							</div>

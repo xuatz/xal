@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 var Parse = require('parse');
 
-import {GlobalListContainer} from './GlobalList' //TODO rename to GlobalAnimeListing soon
-import {UserListingContainer} from './UserListing'
+
+import {GlobalListContainer} from './GlobalList' //TODO Deprecating soon
+import {UserListingContainer} from './UserListing' //TODO Deprecating soon
+
 import {ListsPanelContainer} from './ListsPanel'
+import {StatsPanelContainer} from './StatsPanel'
 
 import * as actions from '../actions'
 
@@ -63,14 +66,7 @@ export class MyApplication extends React.Component {
 				</div>
 				<div style={{width:'65%', float:'left', background:'teal'}} >
 					<div style={{padding:'0px 20px'}} >
-						<h2>
-							<strike>
-								Currently Airing Series
-							</strike>
-							(Deprecated)
-						</h2>
-						<hr/>
-						<GlobalListContainer />
+						<StatsPanelContainer />
 					</div>
 				</div>
 			</div>

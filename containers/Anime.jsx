@@ -66,11 +66,11 @@ class Anime extends React.Component {
 			case 'RECENTLY_AIRED':
 				return (
 					<div>
-						<p>
+						<span>
 							Aired {7 - this.props.item.daysUntil} days ago.
-						</p>
+						</span>
 
-						<div style={{padding:'0px 20px'}} >
+						<div style={styles.episodePanel} >
 							<EpisodePanel />
 						</div>
 					</div>
@@ -78,21 +78,25 @@ class Anime extends React.Component {
 			default:
 				return (
 					<div>
-						<span style={{padding:'4px'}}>
+						<span style={{padding:'0px 4px 0px'}}>
 							{this.props.item.daysUntil} {(this.props.item.daysUntil == '1' || this.props.item.daysUntil == '0') ? 'day' : 'days'}
 						</span>
-						<span style={{padding:'4px'}}>
+						<span style={{padding:'0px 4px 0px'}}>
 							{this.props.item.hoursUntil} {(this.props.item.hoursUntil == '1' || this.props.item.hoursUntil == '0') ? 'hr' : 'hrs'}
 						</span>
-						<span style={{padding:'4px'}}>
+						<span style={{padding:'0px 4px 0px'}}>
 							{this.props.item.minutesUntil} {(this.props.item.minutesUntil == '1' || this.props.item.minutesUntil == '0') ? 'min' : 'mins'}
 						</span>
 						{/*<span style={{padding:'4px'}}>
 							{this.props.item.secsUntil} {(this.props.item.secsUntil == '1' || this.props.item.secsUntil == '0') ? 'sec' : 'secs'}
 						</span>*/}
-						<span style={{padding:'4px'}}>
+						<span style={{padding:'0px 4px 0px'}}>
 							until episode 5!
 						</span>
+
+						<div style={styles.episodePanel} >
+							<EpisodePanel />
+						</div>
 					</div>
 				);
 		}
@@ -100,7 +104,7 @@ class Anime extends React.Component {
 
 	render() {
 		return (
-			<div style={this.props.type == 'GLOBAL_STATS' ? style.globalStats : style.default}>
+			<div style={this.props.type == 'GLOBAL_STATS' ? styles.globalStats : styles.default}>
 				<div>
 					<AnimeTitle
 						id={this.props.item.id}
@@ -116,7 +120,7 @@ class Anime extends React.Component {
 	}
 }
 
-const style = {
+const styles = {
 	globalStats: {
 		maxHeight: trendingPanelHeight,
 		maxWidth: trendingPanelWidth,
@@ -125,6 +129,9 @@ const style = {
 	default: {
 		maxHeight: trendingPanelHeight,
 		background: 'skyblue'
+	},
+	episodePanel: {
+		padding: '5px 20px'
 	}
 }
 

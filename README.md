@@ -21,12 +21,12 @@ open http://localhost:8080
 1. ~~Allow user to add/remove anime from watchlist~~ (done)
   1. Only persist within session; pending data storage with backend. (phase 2)
   1. Also will involve hydrating redux store somewhere (phase 2)
-1. Dummy Stats Panel
-  1. Trending (7 days period)
-  1. Seasonal (3 months period)
+1. ~~Dummy Stats Panel~~
+  1. ~~Trending (7 days period)~~
+  1. ~~Seasonal (3 months period)~~
 
 ## Phase 2 - Setup Parse Server + User Accounts
-1. Deploy ParseServer on heroku.
+1. ~~Deploy ParseServer on heroku.~~
 1. Implement React-Router into project
   1. create login/register module screens
 1. Implement user accounts system with Parse sdk

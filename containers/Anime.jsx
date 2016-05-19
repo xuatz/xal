@@ -69,6 +69,10 @@ class Anime extends React.Component {
 						<p>
 							Aired {7 - this.props.item.daysUntil} days ago.
 						</p>
+
+						<div style={{padding:'0px 20px'}} >
+							<EpisodePanel />
+						</div>
 					</div>
 				);
 			default:
@@ -121,6 +125,28 @@ const style = {
 	default: {
 		maxHeight: trendingPanelHeight,
 		background: 'skyblue'
+	}
+}
+
+class EpisodePanel extends React.Component {
+	constructor() {
+		super();
+		// this.state = {
+		// 	isTooltipActive: false
+		// }
+	}
+
+	render() {
+		return (
+			<div>
+				{this.props.episode ?
+					this.props.episodes.map(function(item, index) {
+						return <Episode item={item} />;
+					})
+					: <span>Episode 1</span>
+				}
+			</div>
+		);
 	}
 }
 

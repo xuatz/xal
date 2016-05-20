@@ -71,7 +71,7 @@ class Anime extends React.Component {
 						</span>
 
 						<div style={styles.episodePanel} >
-							<EpisodePanel />
+							<EpisodePanel episodes={this.props.item.episodes} />
 						</div>
 					</div>
 				);
@@ -95,7 +95,7 @@ class Anime extends React.Component {
 						</span>
 
 						<div style={styles.episodePanel} >
-							<EpisodePanel />
+							<EpisodePanel episodes={this.props.item.episodes} />
 						</div>
 					</div>
 				);
@@ -103,6 +103,8 @@ class Anime extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.item);
+
 		return (
 			<div style={this.props.type == 'GLOBAL_STATS' ? styles.globalStats : styles.default}>
 				<div>
@@ -146,12 +148,22 @@ class EpisodePanel extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.props.episode ?
+				{this.props.episodes ?
 					this.props.episodes.map(function(item, index) {
-						return <Episode item={item} />;
+						return <Episode episode={item} />;
 					})
 					: <span>Episode 1</span>
 				}
+			</div>
+		);
+	}
+}
+
+class Episode extends React.Component {
+	render() {
+		return (
+			<div>
+				<span>Episode {this.props.episode.title}</span>
 			</div>
 		);
 	}

@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+const EPISODE_REVIEW_TYPE_UP = 'UP';
+const EPISODE_REVIEW_TYPE_DOWN = 'DOWN';
+const EPISODE_REVIEW_TYPE_MEH = 'MEH';
+
 const mapStateToProps = (state) => {
 	return {
 
@@ -9,7 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		
+
 	};
 }
 
@@ -26,7 +30,7 @@ class EpisodesPanel extends React.Component {
 			<div>
 				{this.props.episodes ?
 					this.props.episodes.map(function(item, index) {
-						return <Episode episode={item} />;
+						return <Episode episode={item} key={index} />;
 					})
 					: <span>Episode 1</span>
 				}
@@ -36,11 +40,64 @@ class EpisodesPanel extends React.Component {
 }
 
 class Episode extends React.Component {
+	handleOnClickEpisode(type) {
+		console.log('handleOnClickEpisode');
+		console.log('type', type);
+		switch(type) {
+			case 'DOWN':
+				break;
+			case 'UP':
+				break;
+			case 'MEH':
+				break;
+			default:
+				console.log('type is undefined');
+				break;
+		}
+	}
 	render() {
 		return (
 			<div>
 				<span>Episode {this.props.episode.title}</span>
+				<span style={{float:'right'}} >
+					<ThumbsDown 	handleOnClick={this.handleOnClickEpisode} />
+					<Meh 				handleOnClick={this.handleOnClickEpisode} />
+					<ThumbsUp 		handleOnClick={this.handleOnClickEpisode} />
+				</span>
 			</div>
+		);
+	}
+}
+
+class ThumbsDown extends React.Component {
+	render() {
+		return (
+			<span style={{padding:'5px'}}
+				onClick={this.props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_DOWN)} >
+				ThumbsDown
+			</span>
+		);
+	}
+}
+
+class Meh extends React.Component {
+	render() {
+		return (
+			<span style={{padding:'5px'}}
+				onClick={this.props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_MEH)} >
+				Meh
+			</span>
+		);
+	}
+}
+
+class ThumbsUp extends React.Component {
+	render() {
+		return (
+			<span style={{padding:'5px'}}
+				onClick={this.props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_UP)} >
+				ThumbsUp
+			</span>
 		);
 	}
 }

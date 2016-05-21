@@ -19,15 +19,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		addToWatchList: (id) => {
-			console.log('dispatch addToWatchList');
-			console.log('id', id);
 			dispatch(
 				{ type: 'WATCH_LIST_ADD_ITEM', id: id }
 			);
 		},
 		removeFromWatchList: (id) => {
-			console.log('dispatch removeFromWatchList');
-			console.log('id', id);
 			dispatch(
 				{ type: 'WATCH_LIST_REMOVE_ITEM', id: id }
 			);
@@ -105,8 +101,6 @@ class Anime extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.item);
-
 		return (
 			<div style={this.props.type == 'GLOBAL_STATS' ? styles.globalStats : styles.default}>
 				<div>

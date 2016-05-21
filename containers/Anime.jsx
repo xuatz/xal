@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import ToolTip from 'react-portal-tooltip'
 
+import {EpisodesPanelContainer} from './EpisodesPanel'
+
 const trendingPanelWidth = '350px';
 const trendingPanelHeight = '500px';
 const upArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Up.png' width='12px' />;
@@ -71,7 +73,7 @@ class Anime extends React.Component {
 						</span>
 
 						<div style={styles.episodePanel} >
-							<EpisodePanel episodes={this.props.item.episodes} />
+							<EpisodesPanelContainer episodes={this.props.item.episodes} />
 						</div>
 					</div>
 				);
@@ -95,7 +97,7 @@ class Anime extends React.Component {
 						</span>
 
 						<div style={styles.episodePanel} >
-							<EpisodePanel episodes={this.props.item.episodes} />
+							<EpisodesPanelContainer episodes={this.props.item.episodes} />
 						</div>
 					</div>
 				);
@@ -134,38 +136,6 @@ const styles = {
 	},
 	episodePanel: {
 		padding: '5px 20px'
-	}
-}
-
-class EpisodePanel extends React.Component {
-	constructor() {
-		super();
-		// this.state = {
-		// 	isTooltipActive: false
-		// }
-	}
-
-	render() {
-		return (
-			<div>
-				{this.props.episodes ?
-					this.props.episodes.map(function(item, index) {
-						return <Episode episode={item} />;
-					})
-					: <span>Episode 1</span>
-				}
-			</div>
-		);
-	}
-}
-
-class Episode extends React.Component {
-	render() {
-		return (
-			<div>
-				<span>Episode {this.props.episode.title}</span>
-			</div>
-		);
 	}
 }
 

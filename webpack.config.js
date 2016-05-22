@@ -31,11 +31,10 @@ module.exports = {
 		new webpack.NoErrorsPlugin()
 	],
 	module: {
-		loaders: [{
-			test: /\.jsx?$/,
-			exclude: /node_modules/,
-			loader: 'babel'
-		}]
+		loaders: [
+			{test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel'},
+			{test: /(\.css)$/, loaders: ['style', 'css']}
+		]
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx']

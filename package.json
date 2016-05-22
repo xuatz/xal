@@ -12,7 +12,7 @@
     "start:dev": "webpack-dev-server",
     "prod": "node server.js",
     "start": "concurrently \"npm run build\" \"npm run prod\"",
-    "postinstall": "webpack -p --config ./webpack.prod.config.js",
+    "build:prod": "webpack -p --config ./webpack.prod.config.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch"
   },
@@ -57,6 +57,8 @@
     "mocha": "^2.4.5",
     "npm-run-all": "^2.1.1",
     "tape": "^4.5.1",
+    "css-loader": "0.23.1",
+    "style-loader": "0.13.1",
     "webpack-dev-server": "1.13.0"
   }
 }

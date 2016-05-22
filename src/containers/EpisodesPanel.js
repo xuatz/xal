@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import * as actions from '../actions'
+
 const EPISODE_REVIEW_TYPE_UP = 'UP';
 const EPISODE_REVIEW_TYPE_DOWN = 'DOWN';
 const EPISODE_REVIEW_TYPE_MEH = 'MEH';
@@ -8,12 +10,16 @@ const EPISODE_REVIEW_TYPE_MEH = 'MEH';
 const mapStateToProps = (state) => {
 	return {
 
-	};
+	}
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-
+		rateEpisode: (episodeId, review) => {
+			dispatch(
+				actions.rateEpisode(episodeId, review)
+			);
+		}
 	};
 };
 
@@ -45,6 +51,7 @@ class Episode extends React.Component {
 		console.log('type', type);
 		switch(type) {
 			case 'DOWN':
+
 				break;
 			case 'UP':
 				break;

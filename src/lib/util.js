@@ -84,7 +84,8 @@ export const getCurrentSeasonSeries = () => {
 					{
 						'id': 901,
 						'title': '1',
-						'description': null
+						'description': null,
+						'review': 'UP' // UP, DOWN, MEH
 					},
 					{
 						'id': 902,

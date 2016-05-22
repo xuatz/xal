@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import deepFreeze from 'deep-freeze'
 
-import * as MyUtil from '../lib/util'
+import * as MyUtil from '../src/lib/util'
 
 describe('getRemainingSeries()', () => {
 	describe('when user have nothing in watchlist', () => {

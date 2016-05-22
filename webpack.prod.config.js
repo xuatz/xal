@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	devTool: 'source-map',
 	entry: [
-		'./index.js'
+		'./src/index.js'
 	],
 	output: {
 		path: path.join(__dirname, 'dist'),
@@ -15,7 +15,7 @@ module.exports = {
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new HtmlWebpackPlugin({
-			template: 'index.html', // Load a custom template 
+			template: './src/index.html', // Load a custom template 
 			inject: 'body' // Inject all scripts into the body 
 		}),
 		new webpack.DefinePlugin({

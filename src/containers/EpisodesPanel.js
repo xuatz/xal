@@ -9,13 +9,13 @@ const mapStateToProps = (state) => {
 	return {
 
 	};
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 
 	};
-}
+};
 
 class EpisodesPanel extends React.Component {
 	constructor() {
@@ -69,37 +69,31 @@ class Episode extends React.Component {
 	}
 }
 
-class ThumbsDown extends React.Component {
-	render() {
-		return (
-			<span style={{padding:'5px'}}
-				onClick={this.props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_DOWN)} >
-				ThumbsDown
-			</span>
-		);
-	}
+const ThumbsDown = (props) => {
+	return (
+		<span style={{padding:'5px'}}
+			onClick={props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_DOWN)} >
+			ThumbsDown
+		</span>
+	);
 }
 
-class Meh extends React.Component {
-	render() {
-		return (
-			<span style={{padding:'5px'}}
-				onClick={this.props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_MEH)} >
-				Meh
-			</span>
-		);
-	}
+const Meh = (props) => {
+	return (
+		<span style={{padding:'5px'}}
+			onClick={props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_MEH)} >
+			Meh
+		</span>
+	);
 }
 
-class ThumbsUp extends React.Component {
-	render() {
-		return (
-			<span style={{padding:'5px'}}
-				onClick={this.props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_UP)} >
-				ThumbsUp
-			</span>
-		);
-	}
+const ThumbsUp = (props) => {
+	return (
+		<span style={{padding:'5px'}}
+			onClick={props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_UP)} >
+			ThumbsUp
+		</span>
+	);
 }
 
 //smart / connected component

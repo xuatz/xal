@@ -1,10 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-var Parse = require('parse');
-
-
-import {GlobalListContainer} from './GlobalList' //TODO Deprecating soon
-import {UserListingContainer} from './UserListing' //TODO Deprecating soon
+import Parse from 'parse';
 
 import {ListsPanelContainer} from './ListsPanel'
 import {StatsPanelContainer} from './StatsPanel'

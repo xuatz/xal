@@ -11,6 +11,8 @@ class App extends React.Component {
 		return (
 			<div style={{margin:'20px'}} >
 				<Header />
+
+				{/*//TODO in future this will be replaced with Router*/}
 				<MyApplicationContainer  />
 			</div>
 		);

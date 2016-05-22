@@ -60,18 +60,17 @@ let initialState = {
 	daysUntil: null,
 	hoursUntil: null,
 	minutesUntil: null
-}
+};
 
 const anime = (state = initialState, action) => {
 	switch (action.type) {
 		case 'UPDATE_COUNTDOWN':
-			let res = Object.assign({}, state,
+			return Object.assign({}, state,
 				getCountdownFields(state.airingDateTime, false)
 			);
-			return res;
-	default:
-		return state
+		default:
+			return state;
 	}
-}
+};
 
-export default anime
+export default anime;

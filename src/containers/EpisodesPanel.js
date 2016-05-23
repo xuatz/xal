@@ -15,9 +15,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		rateEpisode: (episodeId, review) => {
+		rateEpisode: (animeId, episodeId, review) => {
 			dispatch(
-				actions.rateEpisode(episodeId, review)
+				actions.rateEpisode(animeId, episodeId, review)
 			);
 		}
 	};
@@ -26,17 +26,16 @@ const mapDispatchToProps = (dispatch) => {
 class EpisodesPanel extends React.Component {
 	constructor() {
 		super();
-		// this.state = {
-		// 	isTooltipActive: false
-		// }
+		// console.log('this.props.animeId', this.props.animeId);
 	}
 
 	render() {
+		let self = this;
 		return (
 			<div>
 				{this.props.episodes ?
 					this.props.episodes.map(function(item, index) {
-						return <Episode episode={item} key={index} />;
+						return <Episode animeId={self.props.animeId} episode={item} key={index} rateEpisode={self.props.rateEpisode} />;
 					})
 					: <span>Episode 1</span>
 				}
@@ -46,13 +45,15 @@ class EpisodesPanel extends React.Component {
 }
 
 class Episode extends React.Component {
+	constructor() {
+		super();
+		this.handleOnClickEpisode = this.handleOnClickEpisode.bind(this);
+	}
+
 	handleOnClickEpisode(type) {
-		console.log('handleOnClickEpisode');
-		console.log('type', type);
 		switch(type) {
 			case 'DOWN':
-
-				break;
+				return this.props.rateEpisode(this.props.animeId, this.props.episode.id, type);
 			case 'UP':
 				break;
 			case 'MEH':
@@ -67,9 +68,15 @@ class Episode extends React.Component {
 			<div>
 				<span>Episode {this.props.episode.title}</span>
 				<span style={{float:'right'}} >
-					<ThumbsDown 	handleOnClick={this.handleOnClickEpisode} />
-					<Meh 				handleOnClick={this.handleOnClickEpisode} />
-					<ThumbsUp 		handleOnClick={this.handleOnClickEpisode} />
+					{this.props.episode.review
+						? "Already rated"
+						:
+						<div>
+							<ThumbsDown 	handleOnClick={this.handleOnClickEpisode} />
+							<Meh 				handleOnClick={this.handleOnClickEpisode} />
+							<ThumbsUp 		handleOnClick={this.handleOnClickEpisode} />
+						</div>
+					}
 				</span>
 			</div>
 		);
@@ -77,9 +84,13 @@ class Episode extends React.Component {
 }
 
 const ThumbsDown = (props) => {
+	const onClickThumbsDown = () => {
+		props.handleOnClick(EPISODE_REVIEW_TYPE_DOWN);
+	}
+
 	return (
 		<span style={{padding:'5px'}}
-			onClick={props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_DOWN)} >
+			onClick={onClickThumbsDown} >
 			ThumbsDown
 		</span>
 	);

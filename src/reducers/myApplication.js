@@ -50,20 +50,43 @@ const myApplication = (state = {watchList: []}, action) => {
 			return Object.assign({}, state, {
 				watchList: getUserWatchList()
 			});
-		case 'UPDATE_COUNTDOWN':
-			return Object.assign({}, state, {
-				currentSeasonSeries: currentSeasonSeries(state.currentSeasonSeries, action)
-			});
 		case 'WATCH_LIST_ADD_ITEM':
-			console.log('action', action);
 			return Object.assign({}, state, {
 				watchList: addItemToWatchList(state.watchList, action.id)
 			});
 		case 'WATCH_LIST_REMOVE_ITEM':
-			console.log('action', action);
 			return Object.assign({}, state, {
 				watchList: removeItemFromWatchList(state.watchList, action.id)
 			});
+		case 'UPDATE_COUNTDOWN':
+			return Object.assign({}, state, {
+				currentSeasonSeries: currentSeasonSeries(state.currentSeasonSeries, action)
+			});
+		case 'RATE_SERIES_EPISODE':
+			return Object.assign({}, state, {
+				currentSeasonSeries: animes(state.currentSeasonSeries, action)
+			});
+		default:
+			return state;
+	}
+}
+
+function animes(state, action) {
+	switch(action.type) {
+		case 'RATE_SERIES_EPISODE':
+			let res = state.map(
+				(anAnime) => {
+					if (anAnime.id == action.animeId) {
+						return anime(anAnime, action);
+					}
+
+					return anAnime;
+				}
+			);
+
+			console.log('res', res);
+
+			return res;
 		default:
 			return state;
 	}

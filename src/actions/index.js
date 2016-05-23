@@ -5,10 +5,11 @@ export const fetchCurrentSeasonAnime = () => {
 	return {type: 'FETCH_CURRENT_SEASON_SERIES'};
 };
 
-export const rateEpisode = (episodeId, review) => {
+export const rateEpisode = (animeId, episodeId, review) => {
 	return {
 		type: RATE_SERIES_EPISODE,
-		id: episodeId,
+		animeId: animeId,
+		episodeId: episodeId,
 		review: review
 	};
 };

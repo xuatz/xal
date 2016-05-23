@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+import episodeReducer from './episodeReducer';
+
 //xz: this is very bad, because this reducer is not pure
 //TODO need to change the code to make the reducer pure
 function getCountdownFields(airingDateTime, log) {
@@ -13,15 +15,9 @@ function getCountdownFields(airingDateTime, log) {
 		dayDiff = airingDateTimeMoment.diff(now, 'days');
 
 		if (log) {
-			console.log('huat ah');
 			console.log(airingDateTimeMoment.format());
 			console.log(dayDiff);
-
-			console.log('xz: good value:', airingDateTimeMoment.diff(now, 'minutes'));
-
 		}
-
-
 
 		while (airingDateTimeMoment.diff(now, 'minutes') < 0) {
 			airingDateTimeMoment.add(7, 'days');
@@ -59,7 +55,8 @@ let initialState = {
 	airingDateTime: 'huat ah',
 	daysUntil: null,
 	hoursUntil: null,
-	minutesUntil: null
+	minutesUntil: null,
+	episodes: []
 };
 
 const anime = (state = initialState, action) => {
@@ -68,6 +65,18 @@ const anime = (state = initialState, action) => {
 			return Object.assign({}, state,
 				getCountdownFields(state.airingDateTime, false)
 			);
+		case 'RATE_SERIES_EPISODE':
+			return Object.assign({}, state, {
+				episodes: state.episodes.map(
+					(episode) => {
+						if (episode.id == action.episodeId) {
+							return episodeReducer(episode, action);
+						}
+
+						return episode;
+					}
+				)
+			});
 		default:
 			return state;
 	}

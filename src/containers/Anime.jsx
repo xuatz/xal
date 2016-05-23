@@ -69,7 +69,7 @@ class Anime extends React.Component {
 						</span>
 
 						<div style={styles.episodePanel} >
-							<EpisodesPanelContainer episodes={this.props.item.episodes} />
+							<EpisodesPanelContainer animeId={this.props.item.id} episodes={this.props.item.episodes} />
 						</div>
 					</div>
 				);
@@ -93,7 +93,7 @@ class Anime extends React.Component {
 						</span>
 
 						<div style={styles.episodePanel} >
-							<EpisodesPanelContainer episodes={this.props.item.episodes} />
+							<EpisodesPanelContainer animeId={this.props.item.id} episodes={this.props.item.episodes} />
 						</div>
 					</div>
 				);

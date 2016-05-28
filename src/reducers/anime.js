@@ -14,19 +14,10 @@ function getCountdownFields(airingDateTime, log) {
 		airingDateTimeMoment.add(7, 'days');
 		dayDiff = airingDateTimeMoment.diff(now, 'days');
 
-		if (log) {
-			console.log(airingDateTimeMoment.format());
-			console.log(dayDiff);
-		}
-
 		while (airingDateTimeMoment.diff(now, 'minutes') < 0) {
 			airingDateTimeMoment.add(7, 'days');
 			dayDiff = airingDateTimeMoment.diff(now, 'days');
 		}
-	}
-	if (log) {
-		console.log('xz: dayDiff.format()', dayDiff);
-		console.log('xz: airingDateTimeMoment.format()', airingDateTimeMoment.format());
 	}
 
 	const duration = moment.duration(airingDateTimeMoment.diff(now));
@@ -37,15 +28,6 @@ function getCountdownFields(airingDateTime, log) {
 		minutesUntil: Math.floor(duration.minutes()),
 		secsUntil: Math.floor(duration.seconds())
 	};
-
-	// if (Math.random() > 0.5) {
-	// 	res.daysUntil = 6;
-	// }
-
-	if (log) {
-		console.log('xz: duration', duration);
-		console.log(res);
-	}
 
 	return res;
 }
@@ -67,16 +49,13 @@ const anime = (state = initialState, action) => {
 			);
 		case 'RATE_SERIES_EPISODE':
 			return Object.assign({}, state, {
-				episodes: state.episodes.map(
-					(episode) => {
-						if (episode.id == action.episodeId) {
-							return episodeReducer(episode, action);
-						}
-
-						return episode;
+				episodes: state.episodes.map((episode) => {
+					if (episode.id == action.episodeId) {
+						return episodeReducer(episode, action);
 					}
-				)
-			});
+					return episode;
+				}
+			)});
 		default:
 			return state;
 	}

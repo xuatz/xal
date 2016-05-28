@@ -51,17 +51,10 @@ class Episode extends React.Component {
 	}
 
 	handleOnClickEpisode(type) {
-		switch(type) {
-			case 'DOWN':
-				return this.props.rateEpisode(this.props.animeId, this.props.episode.id, type);
-			case 'UP':
-				break;
-			case 'MEH':
-				break;
-			default:
-				console.log('type is undefined');
-				break;
+		if (type == undefined) {
+			console.log('type is undefined');
 		}
+		return this.props.rateEpisode(this.props.animeId, this.props.episode.id, type);
 	}
 	render() {
 		return (
@@ -73,7 +66,7 @@ class Episode extends React.Component {
 						:
 						<div>
 							<ThumbsDown 	handleOnClick={this.handleOnClickEpisode} />
-							<Meh 				handleOnClick={this.handleOnClickEpisode} />
+							<Meh 			handleOnClick={this.handleOnClickEpisode} />
 							<ThumbsUp 		handleOnClick={this.handleOnClickEpisode} />
 						</div>
 					}
@@ -84,31 +77,36 @@ class Episode extends React.Component {
 }
 
 const ThumbsDown = (props) => {
-	const onClickThumbsDown = () => {
+	const handleOnClick = () => {
 		props.handleOnClick(EPISODE_REVIEW_TYPE_DOWN);
 	}
 
 	return (
-		<span style={{padding:'5px'}}
-			onClick={onClickThumbsDown} >
+		<span style={{padding:'5px'}} onClick={handleOnClick} >
 			ThumbsDown
 		</span>
 	);
 }
 
 const Meh = (props) => {
+	const handleOnClick = () => {
+		props.handleOnClick(EPISODE_REVIEW_TYPE_MEH);
+	}
+
 	return (
-		<span style={{padding:'5px'}}
-			onClick={props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_MEH)} >
+		<span style={{padding:'5px'}} onClick={handleOnClick} >
 			Meh
 		</span>
 	);
 }
 
 const ThumbsUp = (props) => {
+	const handleOnClick = () => {
+		props.handleOnClick(EPISODE_REVIEW_TYPE_UP);
+	}
+
 	return (
-		<span style={{padding:'5px'}}
-			onClick={props.handleOnClick.bind(this, EPISODE_REVIEW_TYPE_UP)} >
+		<span style={{padding:'5px'}} onClick={handleOnClick} >
 			ThumbsUp
 		</span>
 	);

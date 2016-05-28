@@ -74,19 +74,12 @@ const myApplication = (state = {watchList: []}, action) => {
 function animes(state, action) {
 	switch(action.type) {
 		case 'RATE_SERIES_EPISODE':
-			let res = state.map(
-				(anAnime) => {
-					if (anAnime.id == action.animeId) {
-						return anime(anAnime, action);
-					}
-
-					return anAnime;
+			return state.map((anAnime) => {
+				if (anAnime.id == action.animeId) {
+					return anime(anAnime, action);
 				}
-			);
-
-			console.log('res', res);
-
-			return res;
+				return anAnime;
+			});
 		default:
 			return state;
 	}

@@ -4,7 +4,6 @@ let initialState = {
 }
 
 function episodeReducer(state = initialState, action) {
-	console.log('action', action);
 	switch (action.type) {
 		case 'RATE_SERIES_EPISODE':
 			return Object.assign({}, state, {

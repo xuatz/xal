@@ -7,11 +7,11 @@
     "test": "node ./node_modules/mocha/bin/mocha --compilers js:babel-core/register --require ./test/test_helper.js  --recursive",
     "test:watch": "npm run test -- --watch",
     "test:reporter": "node ./node_modules/mocha/bin/mocha --reporter progress --compilers js:babel-core/register --require ./test/test_helper.js  --recursive",
-    "build": "webpack -p --config ./webpack.prod.config.js --progress --colors",
+    "build": "webpack -p --config ./webpack.prod.config.js",
     "dev": "npm-run-all --parallel start:dev test:reporter lint:watch",
     "start:dev": "webpack-dev-server",
     "start:prod": "node server.js",
-    "start": "concurrently \"npm run build\" \"npm run start:prod\"",
+    "start": "npm run build && npm run start:prod",
     "build:prod": "webpack -p --config ./webpack.prod.config.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch"

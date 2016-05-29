@@ -1,14 +1,12 @@
-import express from 'express'
-import webpack from 'webpack';
-import path from 'path';
-import http from 'http';
-
+var express = require('express');
+var webpack = require('webpack');
+var path = require('path');
+var http = require('http');
 var PORT = process.env.PORT || 8080;
 var app = express();
 var httpServer = http.createServer(app);
 
 app.use(express.static(path.join(__dirname, 'dist')));
-
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });

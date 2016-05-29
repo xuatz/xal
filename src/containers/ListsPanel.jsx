@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {AnimeContainer} from './Anime'
-import * as MyUtil from '../lib/util.js'
+import Anime from '../components/Anime';
+import * as MyUtil from '../lib/util.js';
 
 const mapStateToProps = (state) => {
 	return {
@@ -21,81 +21,54 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
+const UserWatchList = (props) => {
+	let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(props.list);
+
+	return (
+		<div>
+			<h2>My Watching List *WIP*</h2>
+			<hr/>
+			{recentlyAired.map(function(item, index) {
+				return <Anime key={index} type="RECENTLY_AIRED" item={item} />;
+			})}
+
+			{upcomingSeries.map(function(item, index) {
+				return <Anime key={index} type="RECENTLY_AIRED" item={item} />;
+			})}
+		</div>
+	);
+}
+
+const RemainingList = (props) => {
+	let remaining = MyUtil.sortSeriesByAiringDateTime(props.list);
+	return (
+		<div>
+			<h2>Remaining Series of this season</h2>
+			<hr/>
+
+			{remaining.map(function(item, index) {
+				return <Anime key={index} type="NORMAL" item={item} />;
+			})}
+		</div>
+	);
+}
+
 class ListsPanel extends React.Component {
     getRemainingSeries(watchList, currentSeasonSeries) {
-    	let res = MyUtil.getRemainingSeries(watchList, currentSeasonSeries);
-    	return res || [];
+    	return MyUtil.getRemainingSeries(watchList, currentSeasonSeries);
     }
 
     getWatchList(watchList, currentSeasonSeries) {
-    	return MyUtil.getSeriesByIds(watchList, currentSeasonSeries) || [];
+    	return MyUtil.getSeriesByIds(watchList, currentSeasonSeries);
     }
 
 	render() {
 		return (
 			<div>
-				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} />
-				<RemainingList list={this.getRemainingSeries(this.props.watchList, this.props.currentSeasonSeries)} />
+				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} addToWatchList={this.props.addToWatchList} removeFromWatchList={this.props.removeFromWatchList} />
+				<RemainingList list={this.getRemainingSeries(this.props.watchList, this.props.currentSeasonSeries)} addToWatchList={this.props.addToWatchList} removeFromWatchList={this.props.removeFromWatchList} />
 			</div>
 		);
-	}
-}
-
-class UserWatchList extends React.Component {
-	render() {
-		let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(this.props.list);
-
-		return (
-			<div>
-				<h2>My Watching List *WIP*</h2>
-				<hr/>
-
-				{recentlyAired.map(
-					function(item, index) {
-						return <AnimeContainer item={item} key={index} type="RECENTLY_AIRED" />; //RECENTLY_AIRED
-					}
-				)}
-
-				{upcomingSeries.map(
-					function(item, index) {
-						return <AnimeContainer item={item} key={index} type="NORMAL" />; //RECENTLY_AIRED
-					}
-				)}
-			</div>
-		)
-	}
-}
-
-
-/*
-
-
-{this.props.upcomingSeries.map(
-	function(item, index) {
-		return <AnimeContainer item={item} key={index} type="DEFAULT" />;
-	}
-)}
-
-*/
-
-class RemainingList extends React.Component {
-	render() {
-		let remaining = MyUtil.sortSeriesByAiringDateTime(this.props.list);
-
-		return (
-			<div>
-				<h2>Remaining Series of this season</h2>
-				<hr/>
-
-				{remaining.map(
-					function(item, index) {
-						return <AnimeContainer item={item} key={index} type="NORMAL" />; //RECENTLY_AIRED
-					}
-				)}
-
-
-			</div>
-		)
 	}
 }
 

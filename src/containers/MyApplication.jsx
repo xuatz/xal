@@ -9,7 +9,7 @@ import * as actions from '../actions'
 
 const mapStateToProps = (state) => {
 	return {
-		// currentlyAiringSeries: state.myApplication.currentlyAiringSeries
+		
 	};
 }
 

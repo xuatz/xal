@@ -32,12 +32,10 @@ module.exports = {
 
 	],
 	module: {
-		loaders: [{
-			test: /\.jsx?$/,
-			loader: 'babel',
-			include: __dirname,
-			exclude: /node_modules/
-		}]
+		loaders: [
+			{test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel'},
+			{test: /(\.css)$/, loaders: ['style', 'css']}
+		]
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx']

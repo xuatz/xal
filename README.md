@@ -2,7 +2,7 @@
 Rewritten in react + node.js!
 
 ## Live Demo
-Check it out here!!
+Check it out here!!  
 https://xal.herokuapp.com/
 
 ### How to build
@@ -27,7 +27,7 @@ open http://localhost:8080
 
 ## Phase 2 - Setup Parse Server + User Accounts
 1. ~~Deploy ParseServer on heroku.~~
-1. Implement React-Router into project
+1. Implement React-Router into project (encountered problem implementing React-Router while keeping react-hot-loader)
   1. create login/register module screens
 1. Implement user accounts system with Parse sdk
 1. Allow users to remain logged in between different sessions (not sure if auto provided by parse sdk)

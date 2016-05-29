@@ -33,7 +33,7 @@ const UserWatchList = (props) => {
 			})}
 
 			{upcomingSeries.map(function(item, index) {
-				return <Anime key={index} type="RECENTLY_AIRED" item={item} />;
+				return <Anime key={index} type="NORMAL" item={item} />;
 			})}
 		</div>
 	);

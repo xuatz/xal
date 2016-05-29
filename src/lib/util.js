@@ -8,17 +8,23 @@ const pad = (n, width, z) => {
 
 //TODO write test unit
 //What if series size = 0
-export const sortSeriesByAiringDateTime = (series = []) => {
+export const sortSeriesByAiringDateTime = (series = [], reverse = false) => {
 	//TODO need to check if function mutates original state; it should not.
 	return series.sort(function(a, b){
 		let valueA = '' + a.daysUntil + pad(a.hoursUntil, 2) + pad(a.minutesUntil, 2);
 		let valueB = '' + b.daysUntil + pad(b.hoursUntil, 2) + pad(b.minutesUntil, 2);
 
 		if (parseInt(valueA) > parseInt(valueB)) {
+			if (reverse) {
+				return -1;
+			}
 			return 1;
 		}
 
 		if (parseInt(valueA) < parseInt(valueB)) {
+			if (reverse) {
+				return 1;
+			}
 			return -1;
 		}
 
@@ -27,16 +33,16 @@ export const sortSeriesByAiringDateTime = (series = []) => {
 }
 
 //TODO write test unit
-export const xuatzSeriesSortAndExtract = (series) => {
+export const xuatzSeriesSortAndExtract = (series, reverse = false) => {
 	let sorted = sortSeriesByAiringDateTime(series);
 
 	let marker = Math.floor(0.7 * sorted.length);
-	let left = sorted.slice(0, marker);
-	let right = sorted.slice(marker);
+	let upcomingSeries = sorted.slice(0, marker);
+	let recentlyAired = sorted.slice(marker);
 
 	return {
-		recentlyAired: right,
-		upcomingSeries: left
+		recentlyAired: recentlyAired,
+		upcomingSeries: upcomingSeries
 	};
 }
 

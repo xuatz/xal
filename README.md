@@ -1,9 +1,6 @@
 # Xuatz Anime List 2
 Rewritten in react + node.js!
-
-## Live Demo
-Check it out here!!  
-https://xal.herokuapp.com/
+try it at https://xal.herokuapp.com/
 
 ### How to build
 

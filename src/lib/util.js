@@ -6,6 +6,26 @@ const pad = (n, width, z) => {
 	return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
+export const sortEpisodesByEpisodeNumber = (episodes, reverse = false) => {
+	if (episodes) {
+		return episodes.sort((a, b) => {
+			if (a.episodeNumber > b.episodeNumber) {
+				if (reverse) {
+					return -1;
+				}
+				return 1;
+			}
+			if (a.episodeNumber < b.episodeNumber) {
+				if (reverse) {
+					return 1;
+				}
+				return -1;
+			}
+			return 0;
+		});
+	}
+}
+
 //TODO write test unit
 //What if series size = 0
 export const sortSeriesByAiringDateTime = (series = [], reverse = false) => {
@@ -90,22 +110,26 @@ export const getCurrentSeasonSeries = () => {
 					{
 						'id': 901,
 						'title': '1',
+						'episodeNumber' : 1,
 						'description': null,
 						'review': 'UP' // UP, DOWN, MEH
 					},
 					{
 						'id': 902,
 						'title': '2',
+						'episodeNumber' : 2,
 						'description': null
 					},
 					{
 						'id': 903,
 						'title': '3',
+						'episodeNumber' : 3,
 						'description': null
 					},
 					{
 						'id': 904,
 						'title': '4',
+						'episodeNumber' : 4,
 						'description': null
 					}
 				]

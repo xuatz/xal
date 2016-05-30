@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import ToolTip from 'react-portal-tooltip'
 
+import * as MyUtil from '../lib/util.js';
+
 import {EpisodesPanelContainer} from './EpisodesPanel'
 
 const upArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Up.png' width='12px' />;
@@ -85,7 +87,7 @@ class AnimeCardBody extends React.Component {
 						</span>
 
 						<div style={{padding: '5px 20px'}} >
-							<EpisodesPanelContainer animeId={this.props.item.id} episodes={this.props.item.episodes} />
+							<EpisodesPanelContainer animeId={this.props.item.id} episodes={MyUtil.sortEpisodesByEpisodeNumber(this.props.item.episodes, true)} />
 						</div>
 					</div>
 				);
@@ -107,10 +109,6 @@ class AnimeCardBody extends React.Component {
 						<span style={{padding:'0px 2px 0px'}}>
 							until episode 5!
 						</span>
-
-						<div style={{padding: '5px 20px'}} >
-							<EpisodesPanelContainer animeId={this.props.item.id} episodes={this.props.item.episodes} />
-						</div>
 					</div>
 				);
 		}

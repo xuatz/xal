@@ -65,8 +65,8 @@ class ListsPanel extends React.Component {
 	render() {
 		return (
 			<div>
-				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} addToWatchList={this.props.addToWatchList} removeFromWatchList={this.props.removeFromWatchList} />
-				<RemainingList list={this.getRemainingSeries(this.props.watchList, this.props.currentSeasonSeries)} addToWatchList={this.props.addToWatchList} removeFromWatchList={this.props.removeFromWatchList} />
+				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} />
+				<RemainingList list={this.getRemainingSeries(this.props.watchList, this.props.currentSeasonSeries)} />
 			</div>
 		);
 	}

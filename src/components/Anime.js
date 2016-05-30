@@ -10,7 +10,7 @@ const Anime = (props) => {
 			<AnimeCardBodyContainer item={props.item} type={props.type} />
 		</div>
 	);
-}
+};
 
 const trendingPanelWidth = '350px';
 const trendingPanelHeight = '500px';
@@ -26,6 +26,6 @@ const styles = {
 		maxHeight: trendingPanelHeight,
 		background: 'skyblue'
 	}
-}
+};
 
 export default Anime;

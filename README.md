@@ -1,5 +1,5 @@
 # Xuatz Anime List 2
-Rewritten in react + node.js!
+Rewritten in react + node.js!  
 try it at https://xal.herokuapp.com/
 
 ### How to build

@@ -1,6 +1,8 @@
-import moment from 'moment';
-
+import anime from './anime';
 import episodeReducer from './episodeReducer';
+
+import moment from 'moment';
+import {getCurrentSeasonSeries} from '../lib/util.js';
 
 //xz: this is very bad, because this reducer is not pure
 //TODO need to change the code to make the reducer pure
@@ -40,45 +42,24 @@ function getCountdownFields(airingDateTime, lastAiredDate) {
 	};
 }
 
-let initialState = {
-	title: 'placeholder title',
-	airingDateTime: null,
-	nextEpisodeDttm: null,
-	episodes: []
-};
-
-const anime = (state = initialState, action) => {
+const animes = (state = [], action) => {
 	switch (action.type) {
+		case 'FETCH_CURRENT_SEASON_SERIES':
+			return getCurrentSeasonSeries();
 		case 'UPDATE_NEXT_EPISODE_DTTM':
-			const now = moment();
-			if (state.nextEpisodeDttm != undefined) {
-				if (now.isBefore(state.nextEpisodeDttm)) {
-					return state;
-				}
-			}
-			let nextEpisodeDttm = moment(state.nextEpisodeDttm || state.airingDateTime);
-			while (now.isAfter(nextEpisodeDttm)) {
-				nextEpisodeDttm.add(7, 'days');
-			}
-			return Object.assign({}, state, {
-				nextEpisodeDttm: nextEpisodeDttm.toISOString()
+			return state.map((anAnime) => {
+				return anime(anAnime, action);
 			});
-		case 'UPDATE_COUNTDOWN':
-			return Object.assign({}, state,
-				getCountdownFields(state.airingDateTime, state.lastAiredDate)
-			);
 		case 'RATE_SERIES_EPISODE':
-			return Object.assign({}, state, {
-				episodes: state.episodes.map((episode) => {
-					if (episode.id == action.episodeId) {
-						return episodeReducer(episode, action);
-					}
-					return episode;
+			return state.map((anAnime) => {
+				if (anAnime.id == action.animeId) {
+					return anime(anAnime, action);
 				}
-			)});
+				return anAnime;
+			});
 		default:
 			return state;
 	}
 };
 
-export default anime;
+export default animes;

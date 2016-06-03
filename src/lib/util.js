@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 
 const pad = (n, width, z) => {
 	z = z || '0';
@@ -31,17 +32,14 @@ export const sortEpisodesByEpisodeNumber = (episodes, reverse = false) => {
 export const sortSeriesByAiringDateTime = (series = [], reverse = false) => {
 	//TODO need to check if function mutates original state; it should not.
 	return series.sort(function(a, b){
-		let valueA = '' + a.daysUntil + pad(a.hoursUntil, 2) + pad(a.minutesUntil, 2);
-		let valueB = '' + b.daysUntil + pad(b.hoursUntil, 2) + pad(b.minutesUntil, 2);
-
-		if (parseInt(valueA) > parseInt(valueB)) {
+		if (moment(a.nextEpisodeDttm).isAfter(b.nextEpisodeDttm)) {
 			if (reverse) {
 				return -1;
 			}
 			return 1;
 		}
 
-		if (parseInt(valueA) < parseInt(valueB)) {
+		if (moment(a.nextEpisodeDttm).isBefore(b.nextEpisodeDttm)) {
 			if (reverse) {
 				return 1;
 			}

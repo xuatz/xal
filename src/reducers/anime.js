@@ -10,7 +10,6 @@ function getCountdownFields(airingDateTime, lastAiredDate) {
 	let airingDateTimeMoment = moment(airingDateTime), lastAiredDateMoment;
 
 	if (airingDateTime == undefined || moment(airingDateTime).isBefore(now)) {
-		console.log('shouldn run so often');
 		airingDateTimeMoment = moment(airingDateTime);
 		let dayDiff = airingDateTimeMoment.diff(now, 'days');
 
@@ -49,7 +48,7 @@ let initialState = {
 
 const anime = (state = initialState, action) => {
 	switch (action.type) {
-		case 'UPDATE_NEXT_EPISODE_DTTM':
+		case 'UPDATE_NEXT_EPISODE_DTTM': {
 			const now = moment();
 			if (state.nextEpisodeDttm != undefined) {
 				if (now.isBefore(state.nextEpisodeDttm)) {
@@ -63,10 +62,7 @@ const anime = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				nextEpisodeDttm: nextEpisodeDttm.toISOString()
 			});
-		case 'UPDATE_COUNTDOWN':
-			return Object.assign({}, state,
-				getCountdownFields(state.airingDateTime, state.lastAiredDate)
-			);
+		}
 		case 'RATE_SERIES_EPISODE':
 			return Object.assign({}, state, {
 				episodes: state.episodes.map((episode) => {

@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import Anime from '../components/Anime';
 import * as MyUtil from '../lib/util.js';
 
 const mapStateToProps = (state) => {
 	return {
-		currentSeasonSeries: state.myApplication.currentSeasonSeries, //actual anime full details
+		currentSeasonSeries: state.animes, //actual anime full details
 		watchList: state.myApplication.watchList //arr of ids
 	};
 }
@@ -29,11 +30,11 @@ const UserWatchList = (props) => {
 			<h2>My Watching List *WIP*</h2>
 			<hr/>
 			{recentlyAired.map(function(item, index) {
-				return <Anime key={index} type="RECENTLY_AIRED" item={item} />;
+				return <Anime key={index} type="RECENTLY_AIRED" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
 			})}
 
 			{upcomingSeries.map(function(item, index) {
-				return <Anime key={index} type="NORMAL" item={item} />;
+				return <Anime key={index} type="NORMAL" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
 			})}
 		</div>
 	);
@@ -54,25 +55,52 @@ const RemainingList = (props) => {
 }
 
 class ListsPanel extends React.Component {
-    getRemainingSeries(watchList, currentSeasonSeries) {
-    	return MyUtil.getRemainingSeries(watchList, currentSeasonSeries);
-    }
+	constructor(props) {
+		super();
+		this.state = {
+			unixTimeStampMs: moment().valueOf()
+		}
+		this.updateUnixTimestamp = this.updateUnixTimestamp.bind(this);
+	}
 
-    getWatchList(watchList, currentSeasonSeries) {
-    	return MyUtil.getSeriesByIds(watchList, currentSeasonSeries);
-    }
+	getWatchList(watchList, currentSeasonSeries) {
+		return MyUtil.getSeriesByIds(watchList, currentSeasonSeries);
+	}
+	getRemainingSeries(watchList, currentSeasonSeries) {
+		return MyUtil.getRemainingSeries(watchList, currentSeasonSeries);
+	}
+
+	updateUnixTimestamp() {
+		this.setState({
+			unixTimeStampMs: moment().valueOf()
+		});
+	}
+
+	componentDidMount() {
+		this.timer = setInterval(this.updateUnixTimestamp, 10); //60000 1min
+
+		// var TestObject = Parse.Object.extend("TestObject");
+		// var testObject = new TestObject();
+		// testObject.save({foo: "bar"}).then(function(object) {
+		// 	alert("yay! it worked");
+		// });
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timer);
+	}
 
 	render() {
 		return (
 			<div>
-				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} />
-				<RemainingList list={this.getRemainingSeries(this.props.watchList, this.props.currentSeasonSeries)} />
+				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} unixTimeStampMs={this.state.unixTimeStampMs}  />
+				<RemainingList list={this.getRemainingSeries(this.props.watchList, this.props.currentSeasonSeries)} unixTimeStampMs={this.state.unixTimeStampMs} />
 			</div>
 		);
 	}
 }
 
 export const ListsPanelContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(ListsPanel);

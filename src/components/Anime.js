@@ -7,7 +7,7 @@ const Anime = (props) => {
 	return (
 		<div style={props.type == 'GLOBAL_STATS' ? styles.globalStats : styles.default}>
 			<AnimeTitleContainer id={props.item.id} title={props.item.title} type={props.type} />
-			<AnimeCardBodyContainer item={props.item} type={props.type} />
+			<AnimeCardBodyContainer item={props.item} type={props.type} unixTimeStampMs={props.unixTimeStampMs} />
 		</div>
 	);
 };

@@ -19,6 +19,11 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(
 				{ type: 'WATCH_LIST_REMOVE_ITEM', id: id }
 			);
+		},
+		updateNextEpisodeDttm: () => {
+			dispatch(
+				{ type: 'UPDATE_NEXT_EPISODE_DTTM' }
+			);
 		}
 	};
 }
@@ -44,12 +49,14 @@ class AnimeTitle extends React.Component {
 		activeId = tooltipId;
 	}
 	addToWatching() {
-		this.props.addToWatchList(this.props.id);
 		this.setState({isTooltipActive: false})
+		this.props.addToWatchList(this.props.id);
+		this.props.updateNextEpisodeDttm();
 	}
 	removeFromWatching() {
-		this.props.removeFromWatchList(this.props.id);
 		this.setState({isTooltipActive: false})
+		this.props.removeFromWatchList(this.props.id);
+		this.props.updateNextEpisodeDttm();
 	}
 	render() {
 		const tooltipId = this.props.type + '-' + this.props.id;

@@ -15,9 +15,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateCountdown: () => {
+		updateNextEpisodeDttm: () => {
 			dispatch(
-				{ type: 'UPDATE_COUNTDOWN' }
+				{ type: 'UPDATE_NEXT_EPISODE_DTTM' }
 			);
 		},
 		fetchCurrentSeasonAnime: () => {
@@ -31,15 +31,13 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
-let count = 0;
 //dumb / pure component
 export class MyApplication extends React.Component {
 	componentDidMount() {
-		console.log('keeping track of this! Should only run once.', count++);
 		this.props.fetchCurrentSeasonAnime();
 		this.props.getUserWatchList();
-		this.props.updateCountdown();
-		this.timer = setInterval(this.props.updateCountdown, 60000); //60000 1min
+		this.props.updateNextEpisodeDttm();
+		this.timer = setInterval(this.props.updateNextEpisodeDttm, 50000); //60000 1min
 
 		// var TestObject = Parse.Object.extend("TestObject");
 		// var testObject = new TestObject();

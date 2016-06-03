@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import ToolTip from 'react-portal-tooltip'
 
-import * as MyUtil from '../lib/util.js';
-
 import {EpisodesPanelContainer} from './EpisodesPanel'
+
+import * as MyUtil from '../lib/util.js';
 
 const upArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Up.png' width='12px' />;
 const downArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Down.png' width='12px' />
@@ -18,43 +18,53 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		
+		updateNextEpisodeDttm: () => {
+			dispatch(
+				{ type: 'UPDATE_NEXT_EPISODE_DTTM' }
+			);
+		}
 	};
 }
 
 class AnimeCardBody extends React.Component {
 	constructor(props) {
 		super();
-		this.state = {
-			duration: props.item.duration
+		this.state = { 
+			daysUntil: null,
+			hoursUntil: null,
+			minutesUntil: null,
+			secsUntil: null
 		};
 		this.updateCountdown = this.updateCountdown.bind(this);
 	}
 
 	componentWillMount() {
+		console.log('AnimeCardBody:componentwillMount()');
 		this.updateCountdown();
-		this.timer = setInterval(this.updateCountdown, 1000); //1000 => 1s
+		this.timer = setInterval(this.updateCountdown, 10); //1000 => 1s
 	}
+
 	updateCountdown() {
-		if (this.state.duration) {
-			let duration = moment.duration(this.state.duration).subtract(1, 's');
+		let nextEpisodeDttm = moment(this.props.item.nextEpisodeDttm);
+		let duration = moment.duration(nextEpisodeDttm.diff(moment(this.props.unixTimeStampMs)));
 
-			if (duration && Math.floor(duration.asDays()) < 0) {
-				duration = this.props.item.duration
-			}
-
+		if (duration.seconds() < 0) {
+			console.log('XZ: key event!!!');
+			this.props.updateNextEpisodeDttm();
+		} else {
 			this.setState({
-				duration: duration,
 				daysUntil: Math.floor(duration.asDays()),
 				hoursUntil: Math.floor(duration.hours()),
 				minutesUntil: Math.floor(duration.minutes()),
-				secsUntil: Math.floor(duration.seconds())
+				secsUntil: Math.floor(duration.seconds()),
+				lastAiredDurationAgo: moment(this.props.item.nextEpisodeDttm).subtract(7, 'days').fromNow()  //TODO XZ: potentially can optimise?
 			});
 		}
 	}
 	componentWillUnmount() {
 		clearInterval(this.timer);
 	}
+
 	itemTypeRenderer(type) {
 		switch(this.props.type) {
 			case 'GLOBAL_STATS':
@@ -83,7 +93,7 @@ class AnimeCardBody extends React.Component {
 				return (
 					<div>
 						<span>
-							Aired {moment(this.props.item.lastAiredDate).fromNow()}.
+							Aired {this.state.lastAiredDurationAgo}.
 						</span>
 
 						<div style={{padding: '5px 20px'}} >
@@ -107,7 +117,7 @@ class AnimeCardBody extends React.Component {
 							{this.state.secsUntil} {(this.props.item.secsUntil == '1' || this.props.item.secsUntil == '0') ? 'sec' : 'secs'}
 						</span>
 						<span style={{padding:'0px 2px 0px'}}>
-							until episode 5!
+							until episode 5! {this.state.demo}
 						</span>
 					</div>
 				);

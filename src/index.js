@@ -14,6 +14,11 @@ import Parse from 'parse';
 import rootReducer from './reducers';
 import App from './components/App';
 
+var APP_ID = "Uclorbou8YGlgHjBg67zYockeUkH67KPovdjZ30D";
+var JAVASCRIPT_KEY = "HQYLuwBlmnLs9QudSWcRgLZT9nAp47kluHvMVPNn";
+Parse.initialize(APP_ID, JAVASCRIPT_KEY);
+Parse.serverURL = 'https://parseapi.back4app.com';
+
 //TODO xz: should relocate this somewhere like /store/configureStore.js next time
 function configureStore(initialState) {
 	let store = createStore(rootReducer, initialState);
@@ -72,6 +77,3 @@ if (module.hot) {
 		), document.getElementById('root'));
 	});
 }
-
-Parse.initialize("xuatzanimelist");
-Parse.serverURL = 'https://xuatz-dev-parse-server.herokuapp.com/parse';

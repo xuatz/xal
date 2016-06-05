@@ -77,7 +77,7 @@ class ListsPanel extends React.Component {
 	}
 
 	componentDidMount() {
-		this.timer = setInterval(this.updateUnixTimestamp, 10); //60000 1min
+		this.timer = setInterval(this.updateUnixTimestamp, 100); //60000 1min
 
 		// var TestObject = Parse.Object.extend("TestObject");
 		// var testObject = new TestObject();

@@ -41,7 +41,7 @@ class AnimeCardBody extends React.Component {
 	componentWillMount() {
 		// console.log('AnimeCardBody:componentwillMount()');
 		this.updateCountdown();
-		this.timer = setInterval(this.updateCountdown, 10); //1000 => 1s
+		this.timer = setInterval(this.updateCountdown, 100); //1000 => 1s
 	}
 
 	updateCountdown() {

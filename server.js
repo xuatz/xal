@@ -12,9 +12,8 @@ var bodyParser = require('body-parser')
 // var COOKIE_SECRET = 'placeholderCookieSecret';
 
 var PORT = process.env.PORT || 8080;
-
-var httpServer = http.createServer(app);
 var app = express();
+var httpServer = http.createServer(app);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

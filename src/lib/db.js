@@ -15,10 +15,8 @@ export const watchListAddItem = (animeId, callback) => {
 					let item = new WatchItem();
 					item.save({
 						animeId: animeId,
-						userId: Parse.User.current().id
-					}).then(function(object) {
-						// console.log('save success!');
-						return callback(undefined);
+						createdBy: Parse.User.current().id,
+						ACL: new Parse.ACL(Parse.User.current())
 					});
 				}
 		  	},
@@ -61,7 +59,7 @@ export const watchListRemoveItem = (animeId, callback) => {
 export const getUserWatchList = (callback) => {
 	if (Parse.User.current()) {
 		let query = new Parse.Query(WatchItem);
-		query.equalTo("userId", Parse.User.current().id);
+		// query.equalTo("userId", Parse.User.current().id);
 		query.find({
 			success: function(results) {
 				return callback && callback(null, _.map(results, (item) => {

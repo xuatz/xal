@@ -1,7 +1,33 @@
 import React from 'react';
-import { Link, IndexLink } from 'react-router';
+import { connect } from 'react-redux';
 
 import Parse from 'parse';
+
+import * as db from '../../lib/db';
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		hydrateStore: () => {
+			db.getUserWatchList((err, res) => {
+				if (res) {
+					dispatch({
+						type: 'HYDRATE_STORE',
+						state: {
+							myApplication: {
+								watchList: res || []
+							}
+						}
+					});
+				}
+			});
+		},
+		flushStore: () => {
+			dispatch({
+				type: 'FLUSH_STORE'
+			});	
+		}
+	};
+}
 
 const Logout = (props) => {
 	const handleOnClick = (event) => {
@@ -9,6 +35,7 @@ const Logout = (props) => {
 		console.log(event);
 		Parse.User.logOut().then(() => {
 			props.updateLoginStatus();
+			props.flushStore();
 		});
 	}
 	return (
@@ -35,14 +62,12 @@ const Login = (props) => {
 		if (props.isLogin) {
 			Parse.User.logIn(event.target.username.value, event.target.password.value, {
 				success: function(user) {
-					// Do stuff after successful login.
-					console.log('login success!');
 					props.updateLoginStatus();
-
+					props.hydrateStore();
 				},
 				error: function(user, error) {
-					// The login failed. Check error to see why.
 					console.log('login failed!');
+					// The login failed. Check error to see why.
 				}
 			});
 		} else {
@@ -124,8 +149,8 @@ class Header extends React.Component {
 				</span>
 				<span style={{width:'40%', float:'right', margin:'20px'}} >
 					{this.state.loggedIn ? 
-						<Logout updateLoginStatus={this.updateLoginStatus} /> :
-						<Login isLogin={this.state.isLogin} handleOnClick={this.handleOnClick} updateLoginStatus={this.updateLoginStatus} />
+						<Logout updateLoginStatus={this.updateLoginStatus} flushStore={this.props.flushStore} /> :
+						<Login isLogin={this.state.isLogin} handleOnClick={this.handleOnClick} updateLoginStatus={this.updateLoginStatus} hydrateStore={this.props.hydrateStore} />
 					}
 				</span>
 			</div>
@@ -133,4 +158,7 @@ class Header extends React.Component {
 	}
 }
 
-export default Header;
+export const HeaderContainer = connect(
+	null,
+	mapDispatchToProps
+)(Header);

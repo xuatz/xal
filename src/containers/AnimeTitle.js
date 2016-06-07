@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import ToolTip from 'react-portal-tooltip';
+import Parse from 'parse';
+
+import * as db from '../lib/db';
 
 const mapStateToProps = (state) => {
 	return {
@@ -14,11 +18,13 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(
 				{ type: 'WATCH_LIST_ADD_ITEM', id: id }
 			);
+			db.watchListAddItem(id);
 		},
 		removeFromWatchList: (id) => {
 			dispatch(
 				{ type: 'WATCH_LIST_REMOVE_ITEM', id: id }
 			);
+			db.watchListRemoveItem(id);
 		},
 		updateNextEpisodeDttm: () => {
 			dispatch(

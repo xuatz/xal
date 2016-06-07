@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 //TODO should be hydrated somewehre else
 const getUserWatchList = () => {
+	//TODO can reuse this method to be more real
 	return [101, 102];
 };
 
@@ -36,6 +37,15 @@ const removeItemFromWatchList = (watchList = [], removeId) => {
 
 const myApplication = (state = {watchList: []}, action) => {
 	switch (action.type) {
+		case 'FLUSH_STORE':
+			return Object.assign({}, state, {
+				watchList: []
+			});
+		case 'HYDRATE_STORE':
+			let res = Object.assign({}, state, {
+				watchList: action.state.myApplication.watchList
+			});
+			return res;
 		case 'GET_USER_WATCH_LIST':
 			return Object.assign({}, state, {
 				watchList: getUserWatchList()

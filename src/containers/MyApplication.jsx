@@ -32,14 +32,10 @@ const mapDispatchToProps = (dispatch) => {
 		hydrateStore: () => {
 			db.getUserWatchList((err, res) => {
 				if (res) {
-					dispatch({
-						type: 'HYDRATE_STORE',
-						state: {
-							myApplication: {
-								watchList: res || []
-							}
-						}
-					});
+					let state = {
+						watchList: res
+					};
+					dispatch(actions.hydrateStore(state));
 				}
 			});
 		}

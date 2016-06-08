@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Parse from 'parse';
 
+import * as actions from '../../actions'
 import * as db from '../../lib/db';
 
 const mapDispatchToProps = (dispatch) => {
@@ -10,14 +11,10 @@ const mapDispatchToProps = (dispatch) => {
 		hydrateStore: () => {
 			db.getUserWatchList((err, res) => {
 				if (res) {
-					dispatch({
-						type: 'HYDRATE_STORE',
-						state: {
-							myApplication: {
-								watchList: res || []
-							}
-						}
-					});
+					let state = {
+						watchList: res
+					};
+					dispatch(actions.hydrateStore(state));
 				}
 			});
 		},
@@ -63,7 +60,7 @@ const Login = (props) => {
 			Parse.User.logIn(event.target.username.value, event.target.password.value, {
 				success: function(user) {
 					props.updateLoginStatus();
-					props.hydrateStore();
+					//props.hydrateStore();
 				},
 				error: function(user, error) {
 					console.log('login failed!');

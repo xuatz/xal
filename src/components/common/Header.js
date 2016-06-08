@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Parse from 'parse';
 
-import * as actions from '../../actions'
+import * as actions from '../../actions';
 import * as db from '../../lib/db';
 
 const mapDispatchToProps = (dispatch) => {
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 			});	
 		}
 	};
-}
+};
 
 const Logout = (props) => {
 	const handleOnClick = (event) => {
@@ -34,7 +34,7 @@ const Logout = (props) => {
 			props.updateLoginStatus();
 			props.flushStore();
 		});
-	}
+	};
 	return (
 		<div>
 			<button onClick={handleOnClick} >
@@ -47,7 +47,7 @@ const Logout = (props) => {
 const Login = (props) => {
 	const handleOnClick = (event) => {
 		console.log('Login:handleOnClick');
-	}
+	};
 
 	const handleOnSubmit = (event) => {
 		event.preventDefault();
@@ -60,7 +60,7 @@ const Login = (props) => {
 			Parse.User.logIn(event.target.username.value, event.target.password.value, {
 				success: function(user) {
 					props.updateLoginStatus();
-					//props.hydrateStore();
+					props.hydrateStore();
 				},
 				error: function(user, error) {
 					console.log('login failed!');
@@ -82,7 +82,7 @@ const Login = (props) => {
 				}
 			});	
 		}
-	}
+	};
 
 	return (
 		<form style={{float:'right'}} onSubmit={handleOnSubmit}>
@@ -113,7 +113,7 @@ class Header extends React.Component {
 			isLogin: true,
 			action: '/placeholder',
 			loggedIn: Parse.User.current() ? true : false
-		}
+		};
 		this.handleOnClick = this.handleOnClick.bind(this);
 		this.updateLoginStatus = this.updateLoginStatus.bind(this);
 	}
@@ -123,7 +123,7 @@ class Header extends React.Component {
 		console.log(event);
 		this.setState({
 			isLogin: !this.state.isLogin
-		})
+		});
 	}
 
 	updateLoginStatus() {

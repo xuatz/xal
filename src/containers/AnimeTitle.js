@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 	return {
 		
 	};
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
 			);
 		}
 	};
-}
+};
 
 let activeId;
 class AnimeTitle extends React.Component {
@@ -40,7 +40,7 @@ class AnimeTitle extends React.Component {
 		super();
 		this.state = {
 			isTooltipActive: false
-		}
+		};
 		this.toggleTooltip = this.toggleTooltip.bind(this);
 		this.addToWatching = this.addToWatching.bind(this);
 		this.removeFromWatching = this.removeFromWatching.bind(this);
@@ -55,12 +55,12 @@ class AnimeTitle extends React.Component {
 		activeId = tooltipId;
 	}
 	addToWatching() {
-		this.setState({isTooltipActive: false})
+		this.setState({isTooltipActive: false});
 		this.props.addToWatchList(this.props.id);
 		this.props.updateNextEpisodeDttm();
 	}
 	removeFromWatching() {
-		this.setState({isTooltipActive: false})
+		this.setState({isTooltipActive: false});
 		this.props.removeFromWatchList(this.props.id);
 		this.props.updateNextEpisodeDttm();
 	}

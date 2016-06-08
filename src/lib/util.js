@@ -54,9 +54,16 @@ export const sortSeriesByAiringDateTime = (series = [], reverse = false) => {
 export const xuatzSeriesSortAndExtract = (series, reverse = false) => {
 	let sorted = sortSeriesByAiringDateTime(series);
 
-	let marker = Math.floor(0.7 * sorted.length);
-	let upcomingSeries = sorted.slice(0, marker);
-	let recentlyAired = sorted.slice(marker);
+	let upcomingSeries = [];
+	let recentlyAired = [];
+
+	if (sorted.length > 1) {
+		let marker = Math.floor(0.7 * sorted.length);
+		upcomingSeries = sorted.slice(0, marker);
+		recentlyAired = sorted.slice(marker);
+	} else {
+		upcomingSeries = sorted;
+	}	
 
 	return {
 		recentlyAired: recentlyAired,

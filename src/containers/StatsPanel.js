@@ -42,8 +42,12 @@ class StatsPanel extends React.Component {
 	render() {
 		return (
 			<div>
-				<TrendingSeriesContainer list={this.props.recentlyAired} />
-				<SeasonalPerformers list={this.props.upcomingSeries} />
+				<div style={{display:'inline-block', width:'100%'}} >
+					<TrendingSeriesContainer list={this.props.recentlyAired} />
+				</div>
+				<div style={{display:'inline-block', width:'100%'}} >
+					<SeasonalPerformers list={this.props.upcomingSeries} />
+				</div>
 			</div>
 		);
 	}

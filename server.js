@@ -11,8 +11,7 @@ var bodyParser = require('body-parser')
 // var JAVASCRIPT_KEY = "HQYLuwBlmnLs9QudSWcRgLZT9nAp47kluHvMVPNn";
 // var COOKIE_SECRET = 'placeholderCookieSecret';
 
-//var PORT = process.env.PORT || 8080;
-var PORT = 8080;
+var PORT = process.env.PORT || 8080;
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));

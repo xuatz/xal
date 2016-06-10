@@ -22,7 +22,7 @@ open http://localhost:8080
   1. ~~Trending (7 days period)~~
   1. ~~Seasonal (3 months period)~~
 
-## ~~Phase 2 - Setup Parse Server + User Accounts~~ (Completed)
+## **_Phase 2 - Setup Parse Server + User Accounts (Completed)_**
 1. ~~Deploy ParseServer on heroku.~~
 1. ~~Implement user accounts system with Parse sdk~~
 

@@ -13,3 +13,10 @@ export const rateEpisode = (animeId, episodeId, review) => {
 		review: review
 	};
 };
+
+export const hydrateStore = (state) => {
+	return {
+		type: 'HYDRATE_STORE',
+		state: state
+	};
+};

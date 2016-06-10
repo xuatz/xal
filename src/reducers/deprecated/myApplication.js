@@ -37,27 +37,26 @@ const removeItemFromWatchList = (watchList = [], removeId) => {
 
 const myApplication = (state = {watchList: []}, action) => {
 	switch (action.type) {
-		case 'FLUSH_STORE':
-			return Object.assign({}, state, {
-				watchList: []
-			});
-		case 'HYDRATE_STORE':
-			let res = Object.assign({}, state, {
-				watchList: action.state.myApplication.watchList
-			});
-			return res;
-		case 'GET_USER_WATCH_LIST':
-			return Object.assign({}, state, {
-				watchList: getUserWatchList()
-			});
-		case 'WATCH_LIST_ADD_ITEM':
-			return Object.assign({}, state, {
-				watchList: addItemToWatchList(state.watchList, action.id)
-			});
-		case 'WATCH_LIST_REMOVE_ITEM':
-			return Object.assign({}, state, {
-				watchList: removeItemFromWatchList(state.watchList, action.id)
-			});
+		// case 'FLUSH_STORE':
+		// 	return Object.assign({}, state, {
+		// 		watchList: []
+		// 	});
+		// case 'HYDRATE_STORE':
+		// 	return Object.assign({}, state, {
+		// 		watchList: action.state.myApplication.watchList
+		// 	});
+		// case 'GET_USER_WATCH_LIST':
+		// 	return Object.assign({}, state, {
+		// 		watchList: getUserWatchList()
+		// 	});
+		// case 'WATCH_LIST_ADD_ITEM':
+		// 	return Object.assign({}, state, {
+		// 		watchList: addItemToWatchList(state.watchList, action.id)
+		// 	});
+		// case 'WATCH_LIST_REMOVE_ITEM':
+		// 	return Object.assign({}, state, {
+		// 		watchList: removeItemFromWatchList(state.watchList, action.id)
+		// 	});
 		default:
 			return state;
 	}

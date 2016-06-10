@@ -13,7 +13,6 @@ var bodyParser = require('body-parser')
 
 var PORT = process.env.PORT || 8080;
 var app = express();
-var httpServer = http.createServer(app);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -29,7 +28,7 @@ app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-httpServer.listen(PORT, function(error) {
+app.listen(PORT, function(error) {
 	if (error) {
 		console.error(error);
 	} else {

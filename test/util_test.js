@@ -3,6 +3,69 @@ import deepFreeze from 'deep-freeze'
 
 import * as MyUtil from '../src/lib/util'
 
+describe('xuatzSeriesSortAndExtract()', () => {
+	describe('when user watchlist only contain 1 item', () => {
+		it('should categorise it as `upcomingSeries`', () => {
+			const given = [
+				{
+					airingDateTime: "2016-04-07T23:00:00+09:00",
+					id: 108,
+					nextEpisodeDttm: "2016-06-09T14:00:00.000Z",
+					thumbnail: "http://anilist.co/img/dir/anime/reg/21290-oIkeZVRywuWV.jpg",
+					title: "Netoge no Yome wa Onnanoko ja Nai to Omotta"
+				}
+			];
+
+			const expected = given;
+			const {recentlyAired, upcomingSeries} = MyUtil.xuatzSeriesSortAndExtract(given);
+			expect(upcomingSeries).to.deep.equal(expected);
+		});
+	});
+	describe('when user watchlist contain only 3 items', () => {
+		it('should categorise oldest as `recentlyAired` and the other 2 as `upcomingSeries`', () => {
+			const given = [
+				{
+					id: 108,
+					airingDateTime: "2016-04-07T23:00:00+09:00",
+					nextEpisodeDttm: "2016-06-09T14:00:00.000Z",
+					thumbnail: "http://anilist.co/img/dir/anime/reg/21290-oIkeZVRywuWV.jpg",
+					title: "Series A"
+				},
+				{
+					id: 106,
+					airingDateTime: "2016-04-08T00:25:00+09:00",
+					nextEpisodeDttm: "2016-06-09T15:25:00.000Z",
+					thumbnail: "http://anilist.co/img/dir/anime/reg/21290-oIkeZVRywuWV.jpg",
+					title: "Netoge no Yome wa Onnanoko ja Nai to Omotta"
+				},
+				{
+					id:102, 
+					airingDateTime:"2016-01-08T01:25:00+09:00",
+					nextEpisodeDttm: "2016-06-09T16:25:00.000Z",
+					thumbnail: "http://anilist.co/img/dir/anime/reg/21170-G9LdO8IwWHUR.jpg", 
+					title: "Assassination Classroom S2"
+				}
+			];
+
+			const expectedRA = [{
+				id: 102
+			}];
+			const expectedUS = [{
+				id: 108
+			},{
+				id: 106
+			}];
+
+			const {recentlyAired, upcomingSeries} = MyUtil.xuatzSeriesSortAndExtract(given);
+
+			expect(recentlyAired[0].id).to.equal(expectedRA[0].id);
+			expect(upcomingSeries[0].id).to.equal(expectedUS[0].id);
+			expect(upcomingSeries[1].id).to.equal(expectedUS[1].id);
+		});
+	});
+});
+
+
 describe('getRemainingSeries()', () => {
 	describe('when user have nothing in watchlist', () => {
 		it('should remove nothing', () => {

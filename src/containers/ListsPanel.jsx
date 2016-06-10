@@ -8,7 +8,7 @@ import * as MyUtil from '../lib/util.js';
 const mapStateToProps = (state) => {
 	return {
 		currentSeasonSeries: state.animes, //actual anime full details
-		watchList: state.myApplication.watchList //arr of ids
+		watchList: state.watchList //arr of ids
 	};
 }
 

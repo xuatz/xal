@@ -23,7 +23,7 @@ open http://localhost:8080
   1. ~~Seasonal (3 months period)~~
 
 ## **_Phase 2 - Setup Parse Server + User Accounts (Completed)_**
-1. ~~Deploy ParseServer on heroku.~~
+1. ~~Deploy Parse Service with back4app~~
 1. ~~Implement user accounts system with Parse sdk~~
 
 ## Phase 3 - Sync app data with database

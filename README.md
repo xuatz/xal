@@ -24,7 +24,7 @@ open http://localhost:8080
 
 ## **_Phase 2 - Setup Parse Server + User Accounts (Completed)_**
 1. ~~Deploy Parse Service with back4app~~
-1. ~~Implement user accounts system with Parse sdk~~
+1. ~~Implement user accounts system with Parse~~
 
 ## Phase 3 - Sync app data with database
 1. ~~save and retrieve user's watchlist to/from parse database (hydrating redux store)~~

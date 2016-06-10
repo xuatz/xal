@@ -16,21 +16,18 @@ open http://localhost:8080
 1. ~~Show all the animes that are airing this season in chronological order of time until airing~~ (done)
   1. Currently using dummy data for current season animes; need to fetch from db (phase 2)
 1. ~~Allow user to add/remove anime from watchlist~~ (done)
-  1. Only persist within session; pending data storage with backend. (phase 2)
-  1. Also will involve hydrating redux store somewhere (phase 2)
+  1. ~~Only persist within session; pending data storage with backend. (phase 2)~~
+  1. ~~Also will involve hydrating redux store somewhere (phase 2)~~
 1. ~~Dummy Stats Panel~~
   1. ~~Trending (7 days period)~~
   1. ~~Seasonal (3 months period)~~
 
-## Phase 2 - Setup Parse Server + User Accounts
+## ~~Phase 2 - Setup Parse Server + User Accounts~~ (Completed)
 1. ~~Deploy ParseServer on heroku.~~
-1. Implement React-Router into project (encountered problem implementing React-Router while keeping react-hot-loader)
-  1. create login/register module screens
-1. Implement user accounts system with Parse sdk
-1. Allow users to remain logged in between different sessions (not sure if auto provided by parse sdk)
+1. ~~Implement user accounts system with Parse sdk~~
 
 ## Phase 3 - Sync app data with database
-1. save and retrieve user's watchlist to/from parse database (hydrating redux store)
+1. ~~save and retrieve user's watchlist to/from parse database (hydrating redux store)~~
 1. write an admin module for populating new anime data
   1. alternatively can use anilist.co api to fetch data?
   1. or a webcrawler

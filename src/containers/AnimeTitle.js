@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ToolTip from 'react-portal-tooltip';
-import Parse from 'parse';
 
 import * as db from '../lib/db';
 
@@ -57,12 +56,10 @@ class AnimeTitle extends React.Component {
 	addToWatching() {
 		this.setState({isTooltipActive: false});
 		this.props.addToWatchList(this.props.id);
-		this.props.updateNextEpisodeDttm();
 	}
 	removeFromWatching() {
 		this.setState({isTooltipActive: false});
 		this.props.removeFromWatchList(this.props.id);
-		this.props.updateNextEpisodeDttm();
 	}
 	render() {
 		const tooltipId = this.props.type + '-' + this.props.id;

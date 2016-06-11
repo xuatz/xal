@@ -6,34 +6,32 @@ import Anime from '../components/Anime';
 import * as MyUtil from '../lib/util.js';
 
 const mapStateToProps = (state) => {
+	let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(MyUtil.getSeriesByIds(state.watchList, state.animes));
+	let remainingSeries = MyUtil.getRemainingSeries(state.watchList, state.animes);
+
 	return {
-		currentSeasonSeries: state.animes, //actual anime full details
-		watchList: state.watchList //arr of ids
+		recentlyAired: recentlyAired,
+		upcomingSeries: upcomingSeries,
+		remainingSeries: MyUtil.sortSeriesByAiringDateTime(remainingSeries)
 	};
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getRemainingSeries: (watchList) => {
-			dispatch(
-				{ type: 'GET_REMAINING_SERIES' }
-			);
-		}
+		
 	};
 }
 
 const UserWatchList = (props) => {
-	let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(props.list);
-
 	return (
 		<div>
 			<h2>My Watching List *WIP*</h2>
 			<hr/>
-			{recentlyAired.map(function(item, index) {
+			{props.recentlyAired.map(function(item, index) {
 				return <Anime key={index} type="RECENTLY_AIRED" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
 			})}
 
-			{upcomingSeries.map(function(item, index) {
+			{props.upcomingSeries.map(function(item, index) {
 				return <Anime key={index} type="NORMAL" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
 			})}
 		</div>
@@ -41,13 +39,12 @@ const UserWatchList = (props) => {
 }
 
 const RemainingList = (props) => {
-	let remaining = MyUtil.sortSeriesByAiringDateTime(props.list);
 	return (
 		<div>
 			<h2>Remaining Series of this season</h2>
 			<hr/>
 
-			{remaining.map(function(item, index) {
+			{props.list.map(function(item, index) {
 				return <Anime key={index} type="NORMAL" item={item} />;
 			})}
 		</div>
@@ -63,13 +60,6 @@ class ListsPanel extends React.Component {
 		this.updateUnixTimestamp = this.updateUnixTimestamp.bind(this);
 	}
 
-	getWatchList(watchList, currentSeasonSeries) {
-		return MyUtil.getSeriesByIds(watchList, currentSeasonSeries);
-	}
-	getRemainingSeries(watchList, currentSeasonSeries) {
-		return MyUtil.getRemainingSeries(watchList, currentSeasonSeries);
-	}
-
 	updateUnixTimestamp() {
 		this.setState({
 			unixTimeStampMs: moment().valueOf()
@@ -78,12 +68,6 @@ class ListsPanel extends React.Component {
 
 	componentDidMount() {
 		this.timer = setInterval(this.updateUnixTimestamp, 100); //60000 1min
-
-		// var TestObject = Parse.Object.extend("TestObject");
-		// var testObject = new TestObject();
-		// testObject.save({foo: "bar"}).then(function(object) {
-		// 	alert("yay! it worked");
-		// });
 	}
 
 	componentWillUnmount() {
@@ -93,8 +77,8 @@ class ListsPanel extends React.Component {
 	render() {
 		return (
 			<div>
-				<UserWatchList list={this.getWatchList(this.props.watchList, this.props.currentSeasonSeries)} unixTimeStampMs={this.state.unixTimeStampMs}  />
-				<RemainingList list={this.getRemainingSeries(this.props.watchList, this.props.currentSeasonSeries)} unixTimeStampMs={this.state.unixTimeStampMs} />
+				<UserWatchList unixTimeStampMs={this.state.unixTimeStampMs} recentlyAired={this.props.recentlyAired} upcomingSeries={this.props.upcomingSeries} />
+				<RemainingList unixTimeStampMs={this.state.unixTimeStampMs} list={this.props.remainingSeries} />
 			</div>
 		);
 	}

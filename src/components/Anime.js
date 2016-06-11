@@ -6,7 +6,7 @@ import {AnimeCardBodyContainer} from '../containers/AnimeCardBody';
 const Anime = (props) => {
 	return (
 		<div style={props.type == 'GLOBAL_STATS' ? styles.globalStats : styles.default}>
-			<AnimeTitleContainer id={props.item.id} title={props.item.title} type={props.type} />
+			<AnimeTitleContainer id={props.item.objectId} title={props.item.titleRomaji} type={props.type} />
 			<AnimeCardBodyContainer item={props.item} type={props.type} unixTimeStampMs={props.unixTimeStampMs} />
 		</div>
 	);

@@ -55,7 +55,7 @@ const anime = (state = initialState, action) => {
 					return state;
 				}
 			}
-			let nextEpisodeDttm = moment(state.nextEpisodeDttm || state.airingDateTime);
+			let nextEpisodeDttm = moment(state.nextEpisodeDttm || state.startDate);
 			while (now.isAfter(nextEpisodeDttm)) {
 				nextEpisodeDttm.add(7, 'days');
 			}

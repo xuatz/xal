@@ -27,7 +27,7 @@ open http://localhost:8080
 
 ## Phase 3 - Sync app data with database
 1. ~~save and retrieve user's watchlist to/from parse database (hydrating redux store)~~
-1. Retrieve anime list from database
+1. ~~Retrieve anime list from database~~
 1. Retrieve episode list from database
 1. Display aired episodes as childrens of the "Anime" container/component
 

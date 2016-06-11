@@ -14,13 +14,13 @@ const mapStateToProps = (state) => {
 		upcomingSeries: upcomingSeries,
 		remainingSeries: MyUtil.sortSeriesByAiringDateTime(remainingSeries)
 	};
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		
 	};
-}
+};
 
 const UserWatchList = (props) => {
 	return (
@@ -36,7 +36,7 @@ const UserWatchList = (props) => {
 			})}
 		</div>
 	);
-}
+};
 
 const RemainingList = (props) => {
 	return (
@@ -49,21 +49,15 @@ const RemainingList = (props) => {
 			})}
 		</div>
 	);
-}
+};
 
 class ListsPanel extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {
 			unixTimeStampMs: moment().valueOf()
-		}
+		};
 		this.updateUnixTimestamp = this.updateUnixTimestamp.bind(this);
-	}
-
-	updateUnixTimestamp() {
-		this.setState({
-			unixTimeStampMs: moment().valueOf()
-		});
 	}
 
 	componentDidMount() {
@@ -72,6 +66,12 @@ class ListsPanel extends React.Component {
 
 	componentWillUnmount() {
 		clearInterval(this.timer);
+	}
+
+	updateUnixTimestamp() {
+		this.setState({
+			unixTimeStampMs: moment().valueOf()
+		});
 	}
 
 	render() {

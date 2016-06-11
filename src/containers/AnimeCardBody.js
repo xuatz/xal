@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import ToolTip from 'react-portal-tooltip'
+import ToolTip from 'react-portal-tooltip';
 
-import {EpisodesPanelContainer} from './EpisodesPanel'
+import {EpisodesPanelContainer} from './EpisodesPanel';
 
 import * as MyUtil from '../lib/util.js';
 
 const upArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Up.png' width='12px' />;
-const downArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Down.png' width='12px' />
+const downArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Down.png' width='12px' />;
 
 const mapStateToProps = (state) => {
 	return {
 
 	};
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 			);
 		}
 	};
-}
+};
 
 class AnimeCardBody extends React.Component {
 	constructor(props) {
@@ -39,9 +39,11 @@ class AnimeCardBody extends React.Component {
 	}
 
 	componentWillMount() {
-		// console.log('AnimeCardBody:componentwillMount()');
 		this.updateCountdown();
 		this.timer = setInterval(this.updateCountdown, 100); //1000 => 1s
+	}
+	componentWillUnmount() {
+		clearInterval(this.timer);
 	}
 
 	updateCountdown() {
@@ -61,9 +63,7 @@ class AnimeCardBody extends React.Component {
 			});
 		}
 	}
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
+	
 
 	itemTypeRenderer(type) {
 		switch(this.props.type) {

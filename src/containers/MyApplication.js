@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Parse from 'parse';
 
-import {ListsPanelContainer} from './ListsPanel'
-import {StatsPanelContainer} from './StatsPanel'
+import {ListsPanelContainer} from './ListsPanel';
+import {StatsPanelContainer} from './StatsPanel';
 
-import * as actions from '../actions'
+import * as actions from '../actions';
 import * as db from '../lib/db';
 
 const mapStateToProps = (state) => {
 	return {
 		
 	};
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) => {
 			});
 		}
 	};
-}
+};
 
 //dumb / pure component
 export class MyApplication extends React.Component {

@@ -2,6 +2,21 @@ import Parse from 'parse';
 import _ from 'lodash';
 
 let WatchItem = Parse.Object.extend("WatchItem");
+let Anime = Parse.Object.extend("Anime");
+
+export const getAnimeList = (callback) => {
+    let query = new Parse.Query(Anime);
+
+    query.find().then((results) => {
+        if (results) {
+            return results.map((item) => {
+                return item.toJSON();
+            })
+        }
+    }).then((results) => {
+        return callback && callback(null, results);
+    });
+}
 
 export const watchListAddItem = (animeId, callback) => {
     if (Parse.User.current()) {
@@ -10,7 +25,6 @@ export const watchListAddItem = (animeId, callback) => {
         query.find({
             success: function(results) {
                 if (results.length > 0) {
-                    // console.log('item already in watchList');
                     return callback && callback(animeId + ' already exist in watchList');
                 } else {
                     let item = new WatchItem();

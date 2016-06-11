@@ -21,8 +21,11 @@ const mapDispatchToProps = (dispatch) => {
 				{ type: 'UPDATE_NEXT_EPISODE_DTTM' }
 			);
 		},
-		fetchCurrentSeasonAnime: () => {
-			dispatch(actions.fetchCurrentSeasonAnime());
+		fetchCurrentSeasonAnime: (callback) => {
+			db.getAnimeList((err, res) => {
+				dispatch(actions.fetchCurrentSeasonAnime(res));
+				return callback();
+			});
 		},
 		getUserWatchList: () => {
 			dispatch({
@@ -45,24 +48,11 @@ const mapDispatchToProps = (dispatch) => {
 //dumb / pure component
 export class MyApplication extends React.Component {
 	componentDidMount() {
-		this.props.fetchCurrentSeasonAnime();
-		this.props.updateNextEpisodeDttm();
-		this.timer = setInterval(this.props.updateNextEpisodeDttm, 50000); //60000 1min
-
-		// var TestObject = Parse.Object.extend("TestObject");
-		// var testObject = new TestObject();
-		// testObject.save({foo: "bar"}).then(function(object) {
-		// 	alert("yay! it worked");
-		// });
-
-		if (Parse.User.current()) {
-			console.log('logged in!');
+		this.props.fetchCurrentSeasonAnime(() => {
+			this.props.updateNextEpisodeDttm();
 			this.props.hydrateStore();
-		} else {
-			//XZ: currently the operation of getUserWatchList() is being done by
-			// `hydrateStore()` with not code sharing.
-			// this.props.getUserWatchList();
-		}
+		});
+		this.timer = setInterval(this.props.updateNextEpisodeDttm, 50000); //50000
 	}
 
 	componentWillUnmount() {

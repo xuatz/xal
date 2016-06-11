@@ -25,9 +25,6 @@ class TrendingSeries extends React.Component {
 	}
 
 	handleOnClickTab(event) {
-		console.log('TrendingSeries:handleOnClickTab()');
-		console.log('event.target.id', event.target.id);
-
 		this.setState({
 			activeStatsTab: event.target.id
 		});
@@ -68,7 +65,6 @@ class TrendingSeries extends React.Component {
 	}
 
 	render() {
-		console.log(this.state);
 		return (
 			<div>
 				<div>

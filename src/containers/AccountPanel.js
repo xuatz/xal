@@ -33,11 +33,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const Logout = (props) => {
-	console.log();
-
 	const handleOnClick = (event) => {
-		console.log('Logout:handleOnClick');
-		console.log(event);
 		Parse.User.logOut().then(() => {
 			props.updateLoginStatus();
 			props.flushStore();

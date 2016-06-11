@@ -63,7 +63,7 @@ export const xuatzSeriesSortAndExtract = (series, reverse = false) => {
 		recentlyAired = sorted.slice(marker);
 	} else {
 		upcomingSeries = sorted;
-	}	
+	}
 
 	return {
 		recentlyAired: recentlyAired,
@@ -75,9 +75,8 @@ export const getSeriesByIds = (watchList, currentSeasonSeries)  => {
 	if (watchList) {
 		let res2 = watchList.map((id) => {
 			let res = _.find(currentSeasonSeries, (item) => {
-				return item.id == id
+				return item.objectId == id
 			});
-
 
 			if (res) {
 				return res;
@@ -93,7 +92,7 @@ export const getRemainingSeries = (watchList, currentSeasonSeries) => {
 	if (watchList) {
 		for (let id of watchList) {
 			filtered = _.filter(filtered, (item) => {
-				return item.id != id;
+				return item.objectId != id;
 			});
 		}
 	}

@@ -23,27 +23,17 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const UserWatchList = (props) => {
-	// let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(props.list);
-
 	return (
 		<div>
 			<h2>My Watching List *WIP*</h2>
 			<hr/>
-			{
-				props.recentlyAired ?
-					props.recentlyAired.map(function(item, index) {
-						return <Anime key={index} type="RECENTLY_AIRED" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
-					}) :
-					null
-			}
+			{props.recentlyAired.map(function(item, index) {
+				return <Anime key={index} type="RECENTLY_AIRED" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
+			})}
 
-			{
-				props.upcomingSeries ?
-					props.upcomingSeries.map(function(item, index) {
-						return <Anime key={index} type="NORMAL" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
-					}) :
-					null
-			}
+			{props.upcomingSeries.map(function(item, index) {
+				return <Anime key={index} type="NORMAL" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
+			})}
 		</div>
 	);
 }
@@ -54,7 +44,9 @@ const RemainingList = (props) => {
 			<h2>Remaining Series of this season</h2>
 			<hr/>
 
-			{props.list ? props.list.map(function(item, index) {return <Anime key={index} type="NORMAL" item={item} />;}) : null}
+			{props.list.map(function(item, index) {
+				return <Anime key={index} type="NORMAL" item={item} />;
+			})}
 		</div>
 	);
 }
@@ -85,8 +77,8 @@ class ListsPanel extends React.Component {
 	render() {
 		return (
 			<div>
-				<UserWatchList recentlyAired={this.props.recentlyAired} upcomingSeries={this.props.upcomingSeries} unixTimeStampMs={this.state.unixTimeStampMs}  />
-				<RemainingList list={this.props.remainingSeries} unixTimeStampMs={this.state.unixTimeStampMs} />
+				<UserWatchList unixTimeStampMs={this.state.unixTimeStampMs} recentlyAired={this.props.recentlyAired} upcomingSeries={this.props.upcomingSeries} />
+				<RemainingList unixTimeStampMs={this.state.unixTimeStampMs} list={this.props.remainingSeries} />
 			</div>
 		);
 	}

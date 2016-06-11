@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 		fetchCurrentSeasonAnime: (callback) => {
 			db.getAnimeList((err, res) => {
 				dispatch(actions.fetchCurrentSeasonAnime(res));
-				return callback();
+				return callback && callback();
 			});
 		},
 		getUserWatchList: () => {

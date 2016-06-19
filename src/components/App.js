@@ -9,7 +9,7 @@ import '../styles/main.css';
 class App extends React.Component {
 	render() {
 		return (
-			<div style={{margin:'20px'}} >
+			<div>
 				<Header />
 				<MyApplicationContainer  />
 			</div>

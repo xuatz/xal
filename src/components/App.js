@@ -9,9 +9,11 @@ import '../styles/main.css';
 class App extends React.Component {
 	render() {
 		return (
-			<div>
+			<div style={{background:'#1E2124'}} >
 				<Header />
-				<MyApplicationContainer  />
+				<div className="AppBody" style={{width: '980px', margin:'10px auto'}}>
+					<MyApplicationContainer  />
+				</div>				
 			</div>
 		);
 	}

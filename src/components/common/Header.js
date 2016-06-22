@@ -21,8 +21,11 @@ class Header extends React.Component {
 
 	render() {
 		return (
-			<div style={{display:'inline-block', width:'100%', padding:'5px', background:'yellow'}} >
-				<span style={{width:'40%', float:'right', background:'lightblue'}} >
+			<div style={{display:'inline-block', width:'100%'}} >
+				<div style={{display:'inline-block', fontSize:'48px'}}>
+					Xuatz Anime List v2
+				</div>
+				<span style={{width:'40%', float:'right'}} >
 					<AccountPanelContainer 
 						isLoggedIn={this.state.isLoggedIn} 
 						updateLoginStatus={this.updateLoginStatus} />

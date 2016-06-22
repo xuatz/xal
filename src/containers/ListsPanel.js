@@ -25,15 +25,20 @@ const mapDispatchToProps = (dispatch) => {
 const UserWatchList = (props) => {
 	return (
 		<div>
-			<h2>My Watching List *WIP*</h2>
+			<div style={{fontFamily:'serif', fontSize:'28px', fontWeight:'700'}} >
+				My Watchlist
+			</div>
 			<hr/>
 			{props.recentlyAired.map(function(item, index) {
 				return <Anime key={index} type="RECENTLY_AIRED" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
 			})}
 
-			{props.upcomingSeries.map(function(item, index) {
-				return <Anime key={index} type="NORMAL" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
-			})}
+			{props.upcomingSeries.length > 0 ?
+				props.upcomingSeries.map(function(item, index) {
+					return <Anime key={index} type="NORMAL" item={item} unixTimeStampMs={props.unixTimeStampMs} />;
+				}) :
+				"Your watchlist is empty!"
+			}
 		</div>
 	);
 };
@@ -41,7 +46,9 @@ const UserWatchList = (props) => {
 const RemainingList = (props) => {
 	return (
 		<div>
-			<h2>Remaining Series of this season</h2>
+			<div style={{fontFamily:'serif', fontSize:'28px', fontWeight:'700'}} >
+				Remaining Series of this season
+			</div>
 			<hr/>
 
 			{props.list.map(function(item, index) {
@@ -78,6 +85,7 @@ class ListsPanel extends React.Component {
 		return (
 			<div>
 				<UserWatchList unixTimeStampMs={this.state.unixTimeStampMs} recentlyAired={this.props.recentlyAired} upcomingSeries={this.props.upcomingSeries} />
+				<br/>
 				<RemainingList unixTimeStampMs={this.state.unixTimeStampMs} list={this.props.remainingSeries} />
 			</div>
 		);

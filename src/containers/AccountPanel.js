@@ -115,7 +115,7 @@ const Login = (props) => {
 			</div>
 
 			<div>
-				<span onClick={props.handleOnClick} style={{cursor:'pointer', color:'blue', textDecoration:'underline'}} >
+				<span onClick={props.handleOnClick} style={{cursor:'pointer', textDecoration:'underline'}} >
 					{props.isLogin ?
 						"Don't have an account? Create one now!" :
 						"Have an account? Log here!"

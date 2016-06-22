@@ -18,13 +18,11 @@ const styles = {
 	globalStats: {
 		maxHeight: trendingPanelHeight,
 		maxWidth: trendingPanelWidth,
-		background: 'skyblue',
 		display:'inline-block', 
 		margin:'0px 10px 10px 0px'
 	},
 	default: {
 		maxHeight: trendingPanelHeight,
-		background: 'skyblue'
 	}
 };
 

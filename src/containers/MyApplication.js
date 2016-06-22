@@ -61,14 +61,14 @@ export class MyApplication extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<div style={{width:'35%', float:'left', background:'yellow'}} >
-					<div style={{padding:'0px 20px'}} >
+			<div style={{display:'inline-block', background:'#1E2124'}} >
+				<div style={{width:'35%', float:'left', background:'#1E2124'}} >
+					<div style={{margin:'0px 10px 0px 0px', padding:'20px'}} >
 						<ListsPanelContainer />
 					</div>
 				</div>
-				<div style={{width:'65%', float:'left', background:'teal'}} >
-					<div style={{padding:'0px 20px'}} >
+				<div style={{width:'65%', float:'left'}} >
+					<div style={{margin:'0px 0px 0px 5px', padding:'20px'}} >
 						<StatsPanelContainer />
 					</div>
 				</div>

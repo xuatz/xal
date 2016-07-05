@@ -69,36 +69,51 @@ axios.post(baseURL + 'auth/access_token', {
 	            		return newAnime.title_romaji === anime.get('titleRomaji');
 	    			});
 
-	    			if (existingRecord) {
-	    				// console.log('this anime is already in our database, update it maybe?');
-	    				//TODO update record???
-	    			} else {
+	            	// axios.get('https://anilist.co/api/anime/21355?access_token='+access_token)
+	            	axios.get(baseURL + 'anime/' + newAnime.id, {
+						params: {
+							access_token: access_token
+						}
+					})
+	            	.then(function (response) {
+						newAnime = response.data;
 
-	    				//TODO XZ: 	even tho the code below is already functional, 
-	    				// 			i will comment it out just in case
-	    				
-	    				// obj = new Anime();
-	    				// let nextEpisodeDttm = null;
-	    				// let nextEpisodeNo = null;
-	    				// if (newAnime.airing) {
-	    				// 	nextEpisodeDttm: newAnime.airing.time;
-	    				// 	nextEpisodeNo: newAnime.airing.next_episode;
-	    				// }
+						let obj = new Anime();
+						if (existingRecord) {
+							obj = existingRecord;
+						}
 
-	    				// obj.save({
-	    				// 	titleRomaji: newAnime.title_romaji,
-	    				// 	titleEng: newAnime.title_english,
-	    				// 	titleJap: newAnime.title_japanese,
-	    				// 	imageUrlSml: newAnime.image_url_sml,
-	    				// 	imageUrlMed: newAnime.image_url_med,
-	    				// 	imageUrlLge: newAnime.image_url_lge,
-	    				// 	airingStatus: newAnime.airing_status,
-	    				// 	totalEpisode: newAnime.total_episodes,
-	    				// 	nextEpisodeDttm: nextEpisodeDttm,
-	    				// 	nextEpisodeNo: nextEpisodeNo,
-	    				// 	ACL: animeACL
-	    				// });
-	    			}
+						let nextEpisodeDttm = null;
+						let nextEpisodeNo = null;
+
+						
+						if (newAnime.airing) {
+							nextEpisodeDttm = newAnime.airing.time;
+							nextEpisodeNo = newAnime.airing.next_episode;
+						}
+						obj.save({
+							titleRomaji: newAnime.title_romaji,
+							titleEng: newAnime.title_english,
+							titleJap: newAnime.title_japanese,
+							description: newAnime.description,
+							imageUrlSml: newAnime.image_url_sml,
+							imageUrlMed: newAnime.image_url_med,
+							imageUrlLge: newAnime.image_url_lge,
+							totalEpisode: newAnime.total_episodes,
+							startDate: newAnime.start_date,
+							endDate: newAnime.end_date,
+							airingStatus: newAnime.airing_status,
+							nextEpisodeDttm: nextEpisodeDttm,
+							nextEpisodeNo: nextEpisodeNo,
+							ACL: animeACL
+						}, { useMasterKey: true })
+						.catch(function (error) {
+		            		console.log(newAnime.title_romaji, error);
+		            	});
+	            	})
+	            	.catch(function (error) {
+	            		console.log(error);
+	            	});
 	            });
 	        }
 	    })

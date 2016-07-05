@@ -1,15 +1,16 @@
+require('dotenv').config();
+
 var path = require('path');
 var http = require('http');
 var express = require('express');
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
+var Parse = require('parse/node');
+var axios = require('axios');
+var _ = require('lodash');
 
-// var Parse = require('parse/node');
-// var parseExpressHttpsRedirect = require('parse-express-https-redirect');
-// var parseExpressCookieSession = require('parse-express-cookie-session');
-// var PARSE_APP_ID = "Uclorbou8YGlgHjBg67zYockeUkH67KPovdjZ30D";
-// var JAVASCRIPT_KEY = "HQYLuwBlmnLs9QudSWcRgLZT9nAp47kluHvMVPNn";
-// var COOKIE_SECRET = 'placeholderCookieSecret';
+Parse.initialize(process.env.PARSE_APP_ID, process.env.PARSE_JAVASCRIPT_KEY, process.env.PARSE_MASTER_KEY);
+Parse.serverURL = 'https://parseapi.back4app.com';
 
 var PORT = process.env.PORT || 8080;
 var app = express();
@@ -18,15 +19,117 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-// //https://dashboard.back4app.com/apps#/wizard/app-details/d13c136a-4390-4b84-82f8-d611c1176417
-// Parse.initialize(PARSE_APP_ID, JAVASCRIPT_KEY);
-// Parse.serverURL = 'https://parseapi.back4app.com';
-// app.use(parseExpressHttpsRedirect());  // Require user to be on HTTPS.
-
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
+
+// ================================================
+
+var baseURL = 'https://anilist.co/api/';
+axios.post(baseURL + 'auth/access_token', {
+	grant_type: "client_credentials",
+	client_id: process.env.ANILIST_CLIENT_ID,
+	client_secret: process.env.ANILIST_CLIENT_SECRET,
+})
+.then(function (response) {
+	var access_token = response.data.access_token;
+	axios.get(baseURL + 'browse/anime', {
+		params: {
+			access_token: access_token,
+			status: "Currently Airing",
+			airing_data: "airing_data=true",
+			full_page: "full_page=true"
+		}
+	})
+	.then(function (response) {
+		let currentlyAiringSeries = response.data;
+
+		let Anime = Parse.Object.extend("Anime");
+		let animeACL = new Parse.ACL();
+		animeACL.setPublicReadAccess(true);
+		animeACL.setPublicWriteAccess(false);
+
+		let filtered = _.filter(currentlyAiringSeries, (item) => {
+			if (item.adult === false && item.type === 'TV') {
+				return true;
+			}
+			return false;
+		});
+
+		// console.log(filtered);
+
+		console.log('pika1');
+		let query = new Parse.Query(Anime);
+		console.log('pika2');
+	    query.find().then((animeList) => {
+	        if (animeList) {
+	            _.forEach(filtered, (newAnime) => {
+	            	let existingRecord = _.find(animeList, function(anime) {
+	            		return newAnime.title_romaji === anime.get('titleRomaji');
+	    			});
+
+	            	// axios.get('https://anilist.co/api/anime/21355?access_token='+access_token)
+	            	axios.get(baseURL + 'anime/' + newAnime.id, {
+						params: {
+							access_token: access_token
+						}
+					})
+	            	.then(function (response) {
+						newAnime = response.data;
+
+						let obj = new Anime();
+						if (existingRecord) {
+							obj = existingRecord;
+						}
+
+						let nextEpisodeDttm = null;
+						let nextEpisodeNo = null;
+
+						
+						if (newAnime.airing) {
+							nextEpisodeDttm = newAnime.airing.time;
+							nextEpisodeNo = newAnime.airing.next_episode;
+						}
+						obj.save({
+							titleRomaji: newAnime.title_romaji,
+							titleEng: newAnime.title_english,
+							titleJap: newAnime.title_japanese,
+							description: newAnime.description,
+							imageUrlSml: newAnime.image_url_sml,
+							imageUrlMed: newAnime.image_url_med,
+							imageUrlLge: newAnime.image_url_lge,
+							totalEpisode: newAnime.total_episodes,
+							startDate: newAnime.start_date,
+							endDate: newAnime.end_date,
+							airingStatus: newAnime.airing_status,
+							nextEpisodeDttm: nextEpisodeDttm,
+							nextEpisodeNo: nextEpisodeNo,
+							ACL: animeACL
+						}, { useMasterKey: true })
+						.catch(function (error) {
+		            		console.log(newAnime.title_romaji, error);
+		            	});
+	            	})
+	            	.catch(function (error) {
+	            		console.log(error);
+	            	});
+	            });
+	        }
+	    })
+	    .catch(function (error) {
+			console.log(error);
+		});
+	})
+	.catch(function (error) {
+		console.log(error);
+	});
+})
+.catch(function (error) {
+	console.log(error);
+});
+
+// ================================================
 
 app.listen(PORT, function(error) {
 	if (error) {

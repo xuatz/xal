@@ -22,11 +22,13 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div style={{display:'inline-block', width:'100%'}} >
-				<span>
-					{"*Placeholder Header* testing1 | testing2"}
-				</span>
-				<span style={{width:'40%', float:'right', background:'lightblue'}} >
-					<AccountPanelContainer isLoggedIn={this.state.isLoggedIn} updateLoginStatus={this.updateLoginStatus} />
+				<div style={{display:'inline-block', fontSize:'48px'}}>
+					Xuatz Anime List v2
+				</div>
+				<span style={{width:'40%', float:'right'}} >
+					<AccountPanelContainer 
+						isLoggedIn={this.state.isLoggedIn} 
+						updateLoginStatus={this.updateLoginStatus} />
 				</span>
 			</div>
 		);

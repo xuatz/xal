@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import ToolTip from 'react-portal-tooltip'
+import ToolTip from 'react-portal-tooltip';
 
-import {EpisodesPanelContainer} from './EpisodesPanel'
+import {EpisodesPanelContainer} from './EpisodesPanel';
 
 import * as MyUtil from '../lib/util.js';
 
 const upArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Up.png' width='12px' />;
-const downArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Down.png' width='12px' />
+const downArrow = <img src='https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Down.png' width='12px' />;
 
 const mapStateToProps = (state) => {
 	return {
 
 	};
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 			);
 		}
 	};
-}
+};
 
 class AnimeCardBody extends React.Component {
 	constructor(props) {
@@ -39,9 +39,11 @@ class AnimeCardBody extends React.Component {
 	}
 
 	componentWillMount() {
-		// console.log('AnimeCardBody:componentwillMount()');
 		this.updateCountdown();
 		this.timer = setInterval(this.updateCountdown, 100); //1000 => 1s
+	}
+	componentWillUnmount() {
+		clearInterval(this.timer);
 	}
 
 	updateCountdown() {
@@ -61,19 +63,17 @@ class AnimeCardBody extends React.Component {
 			});
 		}
 	}
-	componentWillUnmount() {
-		clearInterval(this.timer);
-	}
+	
 
 	itemTypeRenderer(type) {
 		switch(this.props.type) {
 			case 'GLOBAL_STATS':
 				return (
-					<div style={{background:'orange'}} >
+					<div>
 						<div style={{display:'inline-block'}} >
 							<div style={{float: 'left', width:'50%'}}>
 								<div style={{margin:'10px'}} >
-									<img src={this.props.item.thumbnail} style={{width:'100%'}} alt="thumbnail" />
+									<img src={this.props.item.imageUrlLge} style={{width:'100%'}} alt="thumbnail" />
 								</div>
 							</div>
 							<div style={{float: 'left', width:'50%'}}>
@@ -103,7 +103,7 @@ class AnimeCardBody extends React.Component {
 				);
 			default:
 				return (
-					<div>
+					<div style={{fontSize:'12px'}} >
 						<span style={{padding:'0px 2px 0px'}}>
 							{this.state.daysUntil} {(this.props.item.daysUntil == '1' || this.props.item.daysUntil == '0') ? 'day' : 'days'}
 						</span>
@@ -116,9 +116,9 @@ class AnimeCardBody extends React.Component {
 						<span style={{padding:'0px 2px 0px'}}>
 							{this.state.secsUntil} {(this.props.item.secsUntil == '1' || this.props.item.secsUntil == '0') ? 'sec' : 'secs'}
 						</span>
-						<span style={{padding:'0px 2px 0px'}}>
+						<div>
 							until episode 5! {this.state.demo}
-						</span>
+						</div>
 					</div>
 				);
 		}

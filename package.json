@@ -54,6 +54,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "deep-freeze": "0.0.1",
+    "dotenv": "^2.0.0",
     "eslint": "2.9.0",
     "eslint-plugin-import": "^1.6.1",
     "eslint-plugin-react": "5.0.1",

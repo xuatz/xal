@@ -11,12 +11,12 @@ export const getAnimeList = (callback) => {
         if (results) {
             return results.map((item) => {
                 return item.toJSON();
-            })
+            });
         }
     }).then((results) => {
         return callback && callback(null, results);
     });
-}
+};
 
 export const watchListAddItem = (animeId, callback) => {
     if (Parse.User.current()) {

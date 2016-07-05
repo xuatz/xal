@@ -12,7 +12,7 @@ const Anime = (props) => {
 	);
 };
 
-const trendingPanelWidth = '350px';
+const trendingPanelWidth = '285px';
 const trendingPanelHeight = '500px';
 const styles = {
 	globalStats: {
@@ -22,7 +22,7 @@ const styles = {
 		margin:'0px 10px 10px 0px'
 	},
 	default: {
-		maxHeight: trendingPanelHeight,
+		maxHeight: trendingPanelHeight
 	}
 };
 

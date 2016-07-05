@@ -69,11 +69,11 @@ class AnimeCardBody extends React.Component {
 		switch(this.props.type) {
 			case 'GLOBAL_STATS':
 				return (
-					<div style={{background:'orange'}} >
+					<div>
 						<div style={{display:'inline-block'}} >
 							<div style={{float: 'left', width:'50%'}}>
 								<div style={{margin:'10px'}} >
-									<img src={this.props.item.thumbnail} style={{width:'100%'}} alt="thumbnail" />
+									<img src={this.props.item.imageUrlLge} style={{width:'100%'}} alt="thumbnail" />
 								</div>
 							</div>
 							<div style={{float: 'left', width:'50%'}}>
@@ -103,7 +103,7 @@ class AnimeCardBody extends React.Component {
 				);
 			default:
 				return (
-					<div>
+					<div style={{fontSize:'12px'}} >
 						<span style={{padding:'0px 2px 0px'}}>
 							{this.state.daysUntil} {(this.props.item.daysUntil == '1' || this.props.item.daysUntil == '0') ? 'day' : 'days'}
 						</span>
@@ -116,9 +116,9 @@ class AnimeCardBody extends React.Component {
 						<span style={{padding:'0px 2px 0px'}}>
 							{this.state.secsUntil} {(this.props.item.secsUntil == '1' || this.props.item.secsUntil == '0') ? 'sec' : 'secs'}
 						</span>
-						<span style={{padding:'0px 2px 0px'}}>
+						<div>
 							until episode 5! {this.state.demo}
-						</span>
+						</div>
 					</div>
 				);
 		}

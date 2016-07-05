@@ -1,4 +1,4 @@
-require('dotenv').config();
+process.env.NODE_ENV ? null : require('dotenv').config();
 
 var path = require('path');
 var http = require('http');
@@ -43,29 +43,25 @@ axios.post(baseURL + 'auth/access_token', {
 		}
 	})
 	.then(function (response) {
-		let currentlyAiringSeries = response.data;
+		var currentlyAiringSeries = response.data;
 
-		let Anime = Parse.Object.extend("Anime");
-		let animeACL = new Parse.ACL();
+		var Anime = Parse.Object.extend("Anime");
+		var animeACL = new Parse.ACL();
 		animeACL.setPublicReadAccess(true);
 		animeACL.setPublicWriteAccess(false);
 
-		let filtered = _.filter(currentlyAiringSeries, (item) => {
+		var filtered = _.filter(currentlyAiringSeries, (item) => {
 			if (item.adult === false && item.type === 'TV') {
 				return true;
 			}
 			return false;
 		});
 
-		// console.log(filtered);
-
-		console.log('pika1');
-		let query = new Parse.Query(Anime);
-		console.log('pika2');
+		var query = new Parse.Query(Anime);
 	    query.find().then((animeList) => {
 	        if (animeList) {
 	            _.forEach(filtered, (newAnime) => {
-	            	let existingRecord = _.find(animeList, function(anime) {
+	            	var existingRecord = _.find(animeList, function(anime) {
 	            		return newAnime.title_romaji === anime.get('titleRomaji');
 	    			});
 
@@ -78,13 +74,13 @@ axios.post(baseURL + 'auth/access_token', {
 	            	.then(function (response) {
 						newAnime = response.data;
 
-						let obj = new Anime();
+						var obj = new Anime();
 						if (existingRecord) {
 							obj = existingRecord;
 						}
 
-						let nextEpisodeDttm = null;
-						let nextEpisodeNo = null;
+						var nextEpisodeDttm = null;
+						var nextEpisodeNo = null;
 
 						
 						if (newAnime.airing) {

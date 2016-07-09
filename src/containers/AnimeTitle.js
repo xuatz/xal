@@ -65,9 +65,17 @@ class AnimeTitle extends React.Component {
 		const tooltipId = this.props.type + '-' + this.props.id;
 		return (
 			<div>
-				<h4><span id={tooltipId} onClick={this.toggleTooltip}>
+				<div id={tooltipId} onClick={this.toggleTooltip}
+					style={{
+						fontWeight: "600",
+						textAlign: 'center',
+						background: '#0B4151',
+						borderRadius: '4px',
+						padding:'4px 4px',
+						margin: '10px 0px'
+					}} >
 					{this.props.title}
-				</span></h4>
+				</div>
 				<ToolTip active={this.state.isTooltipActive} position="top" arrow="left"
 					parent={"#" + this.props.type + '-' + this.props.id} tooltipTimeout={150} >
 					<div>

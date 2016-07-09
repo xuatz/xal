@@ -87,6 +87,7 @@ axios.post(baseURL + 'auth/access_token', {
 							nextEpisodeDttm = newAnime.airing.time;
 							nextEpisodeNo = newAnime.airing.next_episode;
 						}
+
 						obj.save({
 							titleRomaji: newAnime.title_romaji,
 							titleEng: newAnime.title_english,
@@ -101,6 +102,8 @@ axios.post(baseURL + 'auth/access_token', {
 							airingStatus: newAnime.airing_status,
 							nextEpisodeDttm: nextEpisodeDttm,
 							nextEpisodeNo: nextEpisodeNo,
+							anilistPopularity: newAnime.popularity,
+							anilistAvgScore: newAnime.average_score,
 							ACL: animeACL
 						}, { useMasterKey: true })
 						.catch(function (error) {

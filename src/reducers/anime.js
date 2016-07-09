@@ -55,6 +55,13 @@ const anime = (state = initialState, action) => {
 					return state;
 				}
 			}
+
+			// console.log('state.nextEpisodeDttm', state.nextEpisodeDttm);
+			// console.log('state.startDate', state.startDate);
+
+			//TODO XZ: im getting a moment warning because one of the series, the startDate is simply 1977
+			// which is not a standardised format
+
 			let nextEpisodeDttm = moment(state.nextEpisodeDttm || state.startDate);
 			while (now.isAfter(nextEpisodeDttm)) {
 				nextEpisodeDttm.add(7, 'days');

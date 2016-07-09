@@ -7,6 +7,35 @@ const pad = (n, width, z) => {
 	return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 };
 
+export const getTrendingAnimes = (series = []) => {
+	var filtered = _.filter(series, (item) => {
+		if (moment().diff(moment(item.startDate), 'months') < 6) {
+			return true;
+		}
+		return false;
+	});
+
+	let sorted = filtered.sort(function(a, b){
+		if (a.anilistPopularity < b.anilistPopularity) {
+			// if (reverse) {
+			// 	return -1;
+			// }
+			return 1;
+		}
+
+		if (a.anilistPopularity > b.anilistPopularity) {
+			// if (reverse) {
+			// 	return 1;
+			// }
+			return -1;
+		}
+
+		return 0;
+	});
+	return sorted.slice(0, 6);
+}
+
+
 export const sortEpisodesByEpisodeNumber = (episodes, reverse = false) => {
 	if (episodes) {
 		return episodes.sort((a, b) => {

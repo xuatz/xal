@@ -7,14 +7,9 @@ import * as MyUtil from '../lib/util.js';
 import {TrendingSeriesContainer} from './TrendingSeries';
 
 const mapStateToProps = (state) => {
-	//TODO do i need to mapStateToProps? why not just state directly
-	//but considering i need to do some manipulation, is this justified?
-	//honestly tho, i can do it in the component render() function, is that better?
-	let { recentlyAired, upcomingSeries } = MyUtil.xuatzSeriesSortAndExtract(state.animes);
-
 	return {
-		recentlyAired: recentlyAired,
-		upcomingSeries: upcomingSeries
+		recentlyAired: MyUtil.getTrendingAnimes(state.animes),
+		upcomingSeries: []
 	};
 }
 

@@ -14,7 +14,9 @@
     "start": "npm run build && npm run start:prod",
     "build:prod": "webpack -p --config ./webpack.prod.config.js",
     "lint": "node_modules/.bin/esw webpack.config.* src",
-    "lint:watch": "npm run lint -- --watch"
+    "lint:watch": "npm run lint -- --watch",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "xuatz",
   "license": "MIT",
@@ -49,7 +51,8 @@
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.0.1",
     "style-loader": "0.13.1",
-    "webpack": "1.13.0"
+    "webpack": "1.13.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -62,5 +65,6 @@
     "mocha": "^2.4.5",
     "tape": "^4.5.1",
     "webpack-dev-server": "1.13.0"
-  }
+  },
+  "snyk": true
 }
